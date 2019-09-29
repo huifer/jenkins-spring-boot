@@ -5,10 +5,13 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * waka time 接口信息
+ *
+ * @Date: 2019-09-29
+ */
 @Data
-public class HeartPO {
-    private Integer proUserId;
-
+public class HeartRest {
     private String branch;
 
     private String category;
@@ -17,7 +20,7 @@ public class HeartPO {
 
     private String cursorpos;
 
-    private String dependencies;
+    private String[] dependencies;
 
     private String entity;
 
@@ -43,5 +46,4 @@ public class HeartPO {
 
     private String userId;
 
-    private Date updateTime;
 }

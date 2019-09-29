@@ -2,6 +2,7 @@ server:
   port: 9999
 
 
+
 # wakatime 配置
 wakatime:
   # 基础url
@@ -22,3 +23,28 @@ wakatime:
   summary_url: ${wakatime.base_url}/users/current/summaries
   # 项目列表的commit时间
   project_detail: ${wakatime.base_url}/users/current/projects
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/at15?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapperxml/*Mapper.xml
+  type-aliases-package: com.huifer.jenkinsspringboot.entity
+
+mybatis-plus:
+  # xml
+  mapper-locations: classpath:mapperxml/*Mapper.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.huifer.jenkinsspringboot.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+#logging:
+#  level:
+#    com:
+#      huifer:
+#        jenkinsspringboot:
+#          mapper: debug

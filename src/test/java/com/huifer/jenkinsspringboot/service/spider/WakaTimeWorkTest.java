@@ -6,20 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.junit.Assert.*;
+
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
-public class WakaSpiderTest {
+public class WakaTimeWorkTest {
     @Autowired
-    private WakaSpider wakaSpider;
-
+    private WakaTimeWork wakaTimeWork;
 
     @Test
-    public void heart() {
-        wakaSpider.heart("2019-09-29", "16e493aa-9ba5-4a40-bcd5-f105bf9522b6", 1);
+    public void updateWakaTimeUserInfo() {
+        wakaTimeWork.updateWakaTimeUserInfo();
     }
 
     @Test
-    public void userInfo() {
-        wakaSpider.userInfo("16e493aa-9ba5-4a40-bcd5-f105bf9522b6");
+    public void updateWakaHeart() {
+        wakaTimeWork.updateWakaHeart();
     }
 }
