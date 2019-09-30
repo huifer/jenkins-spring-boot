@@ -6,28 +6,18 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class HeartPO {
-    private Integer proUserId;
-
-    private String branch;
-
-    private String category;
+public class UserDurationsPO {
+    private Integer uid;
 
     private Date createdAt;
 
     private String cursorpos;
 
-    private String dependencies;
+    private BigDecimal duration;
 
     private String id;
 
-    private String isWrite;
-
-    private String language;
-
     private String lineno;
-
-    private String lines;
 
     private String machineNameId;
 
@@ -35,15 +25,9 @@ public class HeartPO {
 
     private BigDecimal time;
 
-    private String type;
-
-    private String userAgentId;
-
     private String userId;
 
-    private Date updateTime;
-
-    private String entity;
+    private String apiKey;
 
     private String day;
 }

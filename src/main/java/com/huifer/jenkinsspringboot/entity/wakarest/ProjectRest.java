@@ -1,4 +1,4 @@
-package com.huifer.jenkinsspringboot.entity;
+package com.huifer.jenkinsspringboot.entity.wakarest;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,7 +17,7 @@ public class ProjectRest {
 
     @Data
     @ApiModel("项目详情")
-    private static class ProjectData {
+    public static class ProjectData {
         /**
          * 创建时间
          * <datetime: time commit was synced in ISO 8601 format>

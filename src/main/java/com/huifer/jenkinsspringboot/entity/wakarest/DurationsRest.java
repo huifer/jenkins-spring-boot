@@ -1,4 +1,4 @@
-package com.huifer.jenkinsspringboot.entity;
+package com.huifer.jenkinsspringboot.entity.wakarest;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,7 +37,7 @@ public class DurationsRest {
     private String timezone;
 
     @lombok.Data
-    private static class DurationsRestData {
+    public static class DurationsRestData {
         /**
          * 创建时间<br/>
          * time when user was created in ISO 8601 format
@@ -76,6 +76,7 @@ public class DurationsRest {
          * float: start of this duration as ISO 8601 UTC datetime; numbers after decimal point are fractions of a second
          */
         private BigDecimal time;
+
         private String user_id;
     }
 }

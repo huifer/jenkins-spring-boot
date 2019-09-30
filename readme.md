@@ -79,7 +79,7 @@ service -> controller : 数据返回
 - wakatime 落库
 
 ## todo
-- [ ] 先获取wakatime前几天的数据看最多能获取多少,用于sql测试
+- [ * ] 先获取wakatime前几天的数据看最多能获取多少,用于sql测试
 
 
 

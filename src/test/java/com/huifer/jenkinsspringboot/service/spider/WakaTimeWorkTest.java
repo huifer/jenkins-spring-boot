@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
-
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class WakaTimeWorkTest {
@@ -22,5 +20,15 @@ public class WakaTimeWorkTest {
     @Test
     public void updateWakaHeart() {
         wakaTimeWork.updateWakaHeart();
+    }
+
+    @Test
+    public void updateWakaProject() {
+        wakaTimeWork.updateWakaProject();
+    }
+
+    @Test
+    public void updateDurations() {
+        wakaTimeWork.updateDurations();
     }
 }

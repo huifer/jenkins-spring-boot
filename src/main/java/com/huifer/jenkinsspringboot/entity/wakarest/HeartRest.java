@@ -1,4 +1,4 @@
-package com.huifer.jenkinsspringboot.entity;
+package com.huifer.jenkinsspringboot.entity.wakarest;
 
 import lombok.Data;
 

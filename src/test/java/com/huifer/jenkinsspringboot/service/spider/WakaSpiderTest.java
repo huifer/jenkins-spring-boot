@@ -25,11 +25,11 @@ public class WakaSpiderTest {
 
     @Test
     public void durations() {
-        wakaSpider.durations();
+        wakaSpider.durations("2019-09-29", "16e493aa-9ba5-4a40-bcd5-f105bf9522b6", 1);
     }
 
     @Test
     public void projects() {
-        wakaSpider.projects();
+        wakaSpider.projects("16e493aa-9ba5-4a40-bcd5-f105bf9522b6");
     }
 }

@@ -1,7 +1,7 @@
 package com.huifer.jenkinsspringboot.controller;
 
-import com.huifer.jenkinsspringboot.entity.DurationsRest;
-import com.huifer.jenkinsspringboot.entity.ProjectRest;
+import com.huifer.jenkinsspringboot.entity.wakarest.DurationsRest;
+import com.huifer.jenkinsspringboot.entity.wakarest.ProjectRest;
 import com.huifer.jenkinsspringboot.service.spider.WakaSpider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,12 +28,12 @@ public class WakaTimeController {
     })
     @GetMapping("/durations")
     public DurationsRest durations() {
-        return wakaSpider.durations();
+        return wakaSpider.durations("", "", 1);
     }
 
     @ApiOperation(value = "当前用户的项目列表")
     @GetMapping("/projects")
     public ProjectRest projects() {
-        return wakaSpider.projects();
+        return wakaSpider.projects("");
     }
 }

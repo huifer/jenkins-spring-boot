@@ -4,11 +4,13 @@ import com.huifer.jenkinsspringboot.entity.UserApiPO;
 import com.huifer.jenkinsspringboot.entity.WakaUserinfo;
 import com.huifer.jenkinsspringboot.mapper.UserApiPOMapper;
 import com.huifer.jenkinsspringboot.mapper.WakaUserinfoMapper;
+import com.huifer.jenkinsspringboot.util.DateUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +21,7 @@ import java.util.List;
  * @author huifer
  * @date 2019-09-29
  */
+@Slf4j
 @Service
 public class WakaTimeWork {
 
@@ -30,7 +33,7 @@ public class WakaTimeWork {
     private WakaUserinfoMapper wakaUserinfoMapper;
 
     /**
-     * 跟新用户信息
+     * 更新用户信息
      */
     @Transactional(rollbackFor = Exception.class)
     public void updateWakaTimeUserInfo() {
@@ -48,13 +51,75 @@ public class WakaTimeWork {
     }
 
 
+    /**
+     * 下载heart数据
+     */
     @Transactional(rollbackFor = Exception.class)
     public void updateWakaHeart() {
         List<UserApiPO> userApiList = userApiPOMapper.findAll();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         for (UserApiPO userInfo : userApiList) {
-            wakaSpider.heart(sdf.format(new Date()), userInfo.getApiKey(),userInfo.getId());
+            wakaSpider.heart(DateUtils.getYestday(), userInfo.getApiKey(), userInfo.getId());
         }
+    }
+
+    /***
+     * 下载project 信息
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void updateWakaProject() {
+        List<UserApiPO> userApiList = userApiPOMapper.findAll();
+        for (UserApiPO userApiPO : userApiList) {
+            wakaSpider.projects(userApiPO.getApiKey());
+        }
+    }
+
+    /**
+     * 下载duration 信息
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void updateDurations() {
+        List<UserApiPO> userApiList = userApiPOMapper.findAll();
+        for (UserApiPO userApiPO : userApiList) {
+            wakaSpider.durations(DateUtils.getYestday(), userApiPO.getApiKey(), userApiPO.getId());
+        }
+    }
+
+    /**
+     * 每天00:05:00 启动下载project数据
+     */
+    @Scheduled(cron = "0 5 0 * * ? ")
+    public void wakaDurations() {
+        log.info("开始执行定时任务:下载durations数据");
+        this.updateDurations();
+    }
+
+
+    /**
+     * 每天00:05:00 启动下载project数据
+     */
+    @Scheduled(cron = "0 5 0 * * ? ")
+    public void wakaProject() {
+        log.info("开始执行定时任务:下载project数据");
+        this.updateWakaProject();
+    }
+
+
+    /**
+     * 每天00:05:00 启动下载heart数据
+     */
+    @Scheduled(cron = "0 5 0 * * ? ")
+    public void wakaHeart() {
+        log.info("开始执行定时任务:下载heart数据");
+        this.updateWakaHeart();
+    }
+
+    /**
+     * 每天00:05:00 启动下载用户数据
+     */
+    @Scheduled(cron = "0 5 0 * * ? ")
+    public void wakaUserInfo() {
+        log.info("开始执行定时任务:下载heart数据");
+        this.updateWakaTimeUserInfo();
     }
 
 

@@ -37,16 +37,16 @@ mybatis-plus:
   mapper-locations: classpath:mapperxml/*Mapper.xml
   # 实体扫描，多个package用逗号或者分号分隔
   type-aliases-package: com.huifer.jenkinsspringboot.entity
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
-#logging:
-#  level:
-#    com:
-#      huifer:
-#        jenkinsspringboot:
-#          mapper: debug
+logging:
+  level:
+    com:
+      huifer:
+        jenkinsspringboot:
+          mapper: debug
 
 
 

@@ -16,4 +16,5 @@ public interface WakaUserinfoMapper {
     int updateByPrimaryKeySelective(WakaUserinfo record);
 
     int updateByPrimaryKey(WakaUserinfo record);
+
 }

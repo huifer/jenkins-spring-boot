@@ -9,7 +9,6 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="cursorpos" jdbcType="VARCHAR" property="cursorpos" />
     <result column="dependencies" jdbcType="VARCHAR" property="dependencies" />
-    <result column="entity" jdbcType="VARCHAR" property="entity" />
     <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="is_write" jdbcType="VARCHAR" property="isWrite" />
     <result column="language" jdbcType="VARCHAR" property="language" />
@@ -22,23 +21,25 @@
     <result column="user_agent_id" jdbcType="VARCHAR" property="userAgentId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="entity" jdbcType="VARCHAR" property="entity" />
+    <result column="day" jdbcType="VARCHAR" property="day" />
   </resultMap>
   <insert id="insert" parameterType="com.huifer.jenkinsspringboot.entity.HeartPO">
     <!--@mbg.generated-->
     insert into t_heart (pro_user_id, branch, category, 
       created_at, cursorpos, dependencies, 
-      entity, id, is_write, 
-      `language`, `lineno`, `lines`, 
-      machine_name_id, project, `time`, 
-      `type`, user_agent_id, user_id, 
-      update_time)
+      id, is_write, `language`, 
+      `lineno`, `lines`, machine_name_id, 
+      project, `time`, `type`, 
+      user_agent_id, user_id, update_time, 
+      entity, `day`)
     values (#{proUserId,jdbcType=INTEGER}, #{branch,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{cursorpos,jdbcType=VARCHAR}, #{dependencies,jdbcType=VARCHAR}, 
-      #{entity,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{isWrite,jdbcType=VARCHAR}, 
-      #{language,jdbcType=VARCHAR}, #{lineno,jdbcType=VARCHAR}, #{lines,jdbcType=VARCHAR}, 
-      #{machineNameId,jdbcType=VARCHAR}, #{project,jdbcType=VARCHAR}, #{time,jdbcType=DECIMAL}, 
-      #{type,jdbcType=VARCHAR}, #{userAgentId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{id,jdbcType=VARCHAR}, #{isWrite,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
+      #{lineno,jdbcType=VARCHAR}, #{lines,jdbcType=VARCHAR}, #{machineNameId,jdbcType=VARCHAR}, 
+      #{project,jdbcType=VARCHAR}, #{time,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}, 
+      #{userAgentId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{entity,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.huifer.jenkinsspringboot.entity.HeartPO">
     <!--@mbg.generated-->
@@ -61,9 +62,6 @@
       </if>
       <if test="dependencies != null">
         dependencies,
-      </if>
-      <if test="entity != null">
-        entity,
       </if>
       <if test="id != null">
         id,
@@ -101,6 +99,12 @@
       <if test="updateTime != null">
         update_time,
       </if>
+      <if test="entity != null">
+        entity,
+      </if>
+      <if test="day != null">
+        `day`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="proUserId != null">
@@ -120,9 +124,6 @@
       </if>
       <if test="dependencies != null">
         #{dependencies,jdbcType=VARCHAR},
-      </if>
-      <if test="entity != null">
-        #{entity,jdbcType=VARCHAR},
       </if>
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
@@ -159,6 +160,12 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entity != null">
+        #{entity,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
