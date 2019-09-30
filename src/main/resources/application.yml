@@ -20,5 +20,20 @@ wakatime:
   project_url: ${wakatime.base_url}/users/current/projects
   # 一定范围内的开发
   summary_url: ${wakatime.base_url}/users/current/summaries
-  # 项目列表的commit时间
-  project_detail: ${wakatime.base_url}/users/current/projects
+
+
+# rescue time配置
+rescuetime:
+  base_url: https://www.rescuetime.com/anapi
+  # 分析api
+  analytic_url: ${rescuetime.base_url}/data
+  # 每日摘要信息
+  daily_summary_url: ${rescuetime.base_url}/daily_summary_feed
+  # 警报api
+  alert_url: ${rescuetime.base_url}/alerts_feed
+  # 重点api
+  highlight_url: ${rescuetime.base_url}/highlights_feed
+  # 重点介绍api
+  highlight_info_url: ${rescuetime.base_url}/highlights_post
+
+
