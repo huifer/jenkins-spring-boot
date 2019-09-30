@@ -25,24 +25,24 @@ public class WakaSpider {
     private WakaApiUrlConfig wakaApiUrlConfig;
 
 
-    public void projects() {
+    public ProjectRest projects() {
         ResponseEntity<String> forEntity = restTemplate.getForEntity(wakaApiUrlConfig.getProjectUrl()
                 + "?api_key=" + wakaApiUrlConfig.getSecretApiKey(), String.class);
 
         String body = forEntity.getBody();
         JSONObject object = JSONObject.parseObject(body);
         ProjectRest projectRest = object.toJavaObject(ProjectRest.class);
-        System.out.println();
+        return projectRest;
     }
 
 
-    public void durations() {
+    public DurationsRest durations() {
         ResponseEntity<String> forEntity = restTemplate.getForEntity(wakaApiUrlConfig.getDurationUrl()
                 + "?api_key=" + wakaApiUrlConfig.getSecretApiKey() + "&date=2019-09-30", String.class);
         String body = forEntity.getBody();
         JSONObject object = JSONObject.parseObject(body);
         DurationsRest durationsRest = object.toJavaObject(DurationsRest.class);
-        System.out.println();
+        return durationsRest;
     }
 
 
