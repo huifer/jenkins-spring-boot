@@ -58,6 +58,8 @@ public class WakaSpider {
         WakaUserinfo wakaUserinfo = data.toJavaObject(WakaUserinfo.class);
         wakaUserinfo.setApiKey(apiKey);
         return wakaUserinfo;
+    }
+
     public ProjectRest projects() {
         ResponseEntity<String> forEntity = restTemplate.getForEntity(wakaApiUrlConfig.getProjectUrl()
                 + "?api_key=" + wakaApiUrlConfig.getSecretApiKey(), String.class);
@@ -79,9 +81,6 @@ public class WakaSpider {
     }
 
 
-    public void userInfo() {
-        restTemplate.getForEntity(wakaApiUrlConfig.getUserInfoUrl() + "?api_key=" + wakaApiUrlConfig.getSecretApiKey(), String.class);
-    }
 
 
     /**
