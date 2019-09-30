@@ -22,6 +22,8 @@ wakatime:
   summary_url: ${wakatime.base_url}/users/current/summaries
   # 项目列表的commit时间
   project_detail: ${wakatime.base_url}/users/current/projects
+  # 七日历史记录
+  hository_seven: ${wakatime.base_url}/users/current/stats/last_7_days
 spring:
   datasource:
     username: root

@@ -3,9 +3,13 @@ package com.huifer.jenkinsspringboot.service.spider;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.huifer.jenkinsspringboot.config.WakaApiUrlConfig;
-import com.huifer.jenkinsspringboot.entity.*;
+import com.huifer.jenkinsspringboot.entity.HeartPO;
+import com.huifer.jenkinsspringboot.entity.UserDurationsPO;
+import com.huifer.jenkinsspringboot.entity.UserProjectPO;
+import com.huifer.jenkinsspringboot.entity.WakaUserinfo;
 import com.huifer.jenkinsspringboot.entity.wakarest.DurationsRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.HeartRest;
+import com.huifer.jenkinsspringboot.entity.wakarest.HistorySeven;
 import com.huifer.jenkinsspringboot.entity.wakarest.ProjectRest;
 import com.huifer.jenkinsspringboot.mapper.HeartPOMapper;
 import com.huifer.jenkinsspringboot.mapper.UserDurationsPOMapper;
@@ -39,6 +43,24 @@ public class WakaSpider {
 
     @Autowired
     private UserDurationsPOMapper userDurationsMapper;
+
+
+    public HistorySeven historySeven(String apiKey) {
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("api_key", apiKey);
+        ResponseEntity<String> exchange = restTemplate.exchange(
+                wakaApiUrlConfig.getHositorySeven() + "?api_key={api_key}",
+                HttpMethod.GET,
+                HttpEntity.EMPTY,
+                String.class,
+                maps
+        );
+        String body = exchange.getBody();
+        JSONObject object = JSONObject.parseObject(body);
+        HistorySeven historySeven = object.toJavaObject(HistorySeven.class);
+        return historySeven;
+    }
+
 
     /**
      * 用户信息接口

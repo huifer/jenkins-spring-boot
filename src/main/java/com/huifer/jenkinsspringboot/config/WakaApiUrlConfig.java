@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * waka API配置
+ *
  * @Date: 2019-09-29
  */
 @Data
@@ -22,5 +23,6 @@ public class WakaApiUrlConfig {
     private String projectUrl;
     private String summaryUrl;
     private String projectDetail;
+    private String hositorySeven;
 
 }
