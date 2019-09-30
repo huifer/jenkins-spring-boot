@@ -26,8 +26,8 @@ wakatime:
   hository_seven: ${wakatime.base_url}/users/current/stats/last_7_days
 spring:
   datasource:
-    username: root
-    password: root
+    username: huifer
+    password: a12345
     url: jdbc:mysql://localhost:3306/at15?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
