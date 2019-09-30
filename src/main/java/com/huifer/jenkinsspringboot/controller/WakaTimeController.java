@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @Date: 2019-09-30
  */
-@Api(value = "waka_time Controller")
+@Api(value = "waka_time Controller", tags = {"wakatime接口"})
 @RestController
 @RequestMapping("/wakatime")
 public class WakaTimeController {
