@@ -36,4 +36,3 @@ rescuetime:
   # 重点介绍api
   highlight_info_url: ${rescuetime.base_url}/highlights_post
 
-
