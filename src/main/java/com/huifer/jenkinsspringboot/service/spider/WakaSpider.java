@@ -3,7 +3,9 @@ package com.huifer.jenkinsspringboot.service.spider;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.huifer.jenkinsspringboot.config.WakaApiUrlConfig;
+import com.huifer.jenkinsspringboot.entity.DurationsRest;
 import com.huifer.jenkinsspringboot.entity.HeartPO;
+import com.huifer.jenkinsspringboot.entity.ProjectRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +23,27 @@ public class WakaSpider {
     private RestTemplate restTemplate;
     @Autowired
     private WakaApiUrlConfig wakaApiUrlConfig;
+
+
+    public void projects() {
+        ResponseEntity<String> forEntity = restTemplate.getForEntity(wakaApiUrlConfig.getProjectUrl()
+                + "?api_key=" + wakaApiUrlConfig.getSecretApiKey(), String.class);
+
+        String body = forEntity.getBody();
+        JSONObject object = JSONObject.parseObject(body);
+        ProjectRest projectRest = object.toJavaObject(ProjectRest.class);
+        System.out.println();
+    }
+
+
+    public void durations() {
+        ResponseEntity<String> forEntity = restTemplate.getForEntity(wakaApiUrlConfig.getDurationUrl()
+                + "?api_key=" + wakaApiUrlConfig.getSecretApiKey() + "&date=2019-09-30", String.class);
+        String body = forEntity.getBody();
+        JSONObject object = JSONObject.parseObject(body);
+        DurationsRest durationsRest = object.toJavaObject(DurationsRest.class);
+        System.out.println();
+    }
 
 
     public void userInfo() {

@@ -17,4 +17,14 @@ public class WakaSpiderTest {
     public void heart() {
         wakaSpider.heart();
     }
+
+    @Test
+    public void durations() {
+        wakaSpider.durations();
+    }
+
+    @Test
+    public void projects() {
+        wakaSpider.projects();
+    }
 }
