@@ -2,7 +2,6 @@ server:
   port: 9999
 
 
-
 # wakatime 配置
 wakatime:
   # 基础url
@@ -48,3 +47,21 @@ mybatis-plus:
 #      huifer:
 #        jenkinsspringboot:
 #          mapper: debug
+
+
+
+# rescue time配置
+rescuetime:
+  base_url: https://www.rescuetime.com/anapi
+  # 分析api
+  analytic_url: ${rescuetime.base_url}/data
+  # 每日摘要信息
+  daily_summary_url: ${rescuetime.base_url}/daily_summary_feed
+  # 警报api
+  alert_url: ${rescuetime.base_url}/alerts_feed
+  # 重点api
+  highlight_url: ${rescuetime.base_url}/highlights_feed
+  # 重点介绍api
+  highlight_info_url: ${rescuetime.base_url}/highlights_post
+
+test_api: xxxxx

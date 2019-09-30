@@ -22,4 +22,14 @@ public class WakaSpiderTest {
     public void userInfo() {
         wakaSpider.userInfo("16e493aa-9ba5-4a40-bcd5-f105bf9522b6");
     }
+
+    @Test
+    public void durations() {
+        wakaSpider.durations();
+    }
+
+    @Test
+    public void projects() {
+        wakaSpider.projects();
+    }
 }

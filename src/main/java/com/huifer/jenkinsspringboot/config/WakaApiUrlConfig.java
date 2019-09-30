@@ -23,30 +23,4 @@ public class WakaApiUrlConfig {
     private String summaryUrl;
     private String projectDetail;
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("{");
-        sb.append("\"baseUrl\":\"")
-                .append(baseUrl).append('\"');
-        sb.append(",\"clientId\":\"")
-                .append(clientId).append('\"');
-        sb.append(",\"secretApiKey\":\"")
-                .append(secretApiKey).append('\"');
-        sb.append(",\"oauthUrl\":\"")
-                .append(oauthUrl).append('\"');
-        sb.append(",\"userInfoUrl\":\"")
-                .append(userInfoUrl).append('\"');
-        sb.append(",\"durationUrl\":\"")
-                .append(durationUrl).append('\"');
-        sb.append(",\"heartUrl\":\"")
-                .append(heartUrl).append('\"');
-        sb.append(",\"projectUrl\":\"")
-                .append(projectUrl).append('\"');
-        sb.append(",\"summaryUrl\":\"")
-                .append(summaryUrl).append('\"');
-        sb.append(",\"projectDetail\":\"")
-                .append(projectDetail).append('\"');
-        sb.append('}');
-        return sb.toString();
-    }
 }

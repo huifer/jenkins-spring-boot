@@ -3,12 +3,14 @@ package com.huifer.jenkinsspringboot.service.spider;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.huifer.jenkinsspringboot.config.WakaApiUrlConfig;
+import com.huifer.jenkinsspringboot.entity.DurationsRest;
 import com.huifer.jenkinsspringboot.entity.HeartPO;
 import com.huifer.jenkinsspringboot.entity.HeartRest;
 import com.huifer.jenkinsspringboot.entity.WakaUserinfo;
 import com.huifer.jenkinsspringboot.mapper.HeartPOMapper;
 import com.huifer.jenkinsspringboot.mapper.WakaUserinfoMapper;
 import lombok.extern.slf4j.Slf4j;
+import com.huifer.jenkinsspringboot.entity.ProjectRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -56,6 +58,29 @@ public class WakaSpider {
         WakaUserinfo wakaUserinfo = data.toJavaObject(WakaUserinfo.class);
         wakaUserinfo.setApiKey(apiKey);
         return wakaUserinfo;
+    public ProjectRest projects() {
+        ResponseEntity<String> forEntity = restTemplate.getForEntity(wakaApiUrlConfig.getProjectUrl()
+                + "?api_key=" + wakaApiUrlConfig.getSecretApiKey(), String.class);
+
+        String body = forEntity.getBody();
+        JSONObject object = JSONObject.parseObject(body);
+        ProjectRest projectRest = object.toJavaObject(ProjectRest.class);
+        return projectRest;
+    }
+
+
+    public DurationsRest durations() {
+        ResponseEntity<String> forEntity = restTemplate.getForEntity(wakaApiUrlConfig.getDurationUrl()
+                + "?api_key=" + wakaApiUrlConfig.getSecretApiKey() + "&date=2019-09-30", String.class);
+        String body = forEntity.getBody();
+        JSONObject object = JSONObject.parseObject(body);
+        DurationsRest durationsRest = object.toJavaObject(DurationsRest.class);
+        return durationsRest;
+    }
+
+
+    public void userInfo() {
+        restTemplate.getForEntity(wakaApiUrlConfig.getUserInfoUrl() + "?api_key=" + wakaApiUrlConfig.getSecretApiKey(), String.class);
     }
 
 
