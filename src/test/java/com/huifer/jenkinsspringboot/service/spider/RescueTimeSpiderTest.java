@@ -14,6 +14,6 @@ public class RescueTimeSpiderTest {
 
     @Test
     public void dailySummaryData() {
-//        rescueTimeSpider.dailySummaryData();
+        rescueTimeSpider.dailySummaryData();
     }
 }
