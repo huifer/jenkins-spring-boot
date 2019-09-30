@@ -1,5 +1,7 @@
 package com.huifer.jenkinsspringboot.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -10,10 +12,12 @@ import java.util.List;
  * @Date: 2019-09-30
  */
 @Data
+@ApiModel("xxx日期下的开发时间")
 public class DurationsRest {
     /**
      * 分支列表
      */
+    @ApiModelProperty(value = "分支列表", dataType = "String")
     private String branches;
     /**
      * 数据
