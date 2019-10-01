@@ -79,7 +79,9 @@ service -> controller : 数据返回
 - wakatime 落库
 
 ## todo
-- [ * ] 先获取wakatime前几天的数据看最多能获取多少,用于sql测试
+- [*] 先获取wakatime前几天的数据看最多能获取多少,用于sql测试
+- 七日历史记录
+- 查询
 
 
 
@@ -91,10 +93,11 @@ gantt
         title wakatime项目开发
  section 开发
         测试数据下载: active,des1,2019-09-30,1d
-        api接口通讯 : active des2,2019-9-29,2019-10-01
+        api接口通讯 : active des2,2019-9-29,2d
         
-        接口数据入库:  des3,2019-10-01,1d
-        数据统计: des4,2019-10-01,1d
+        接口数据入库:  des3,2019-10-01,1d 
+        数据统计: des4,2019-10-02,1d
+        七日历史记录: des4,2019-10-01,1d
 
   
 ```

@@ -25,6 +25,12 @@
 //    @Autowired
 //    private WakaSpider wakaSpider;
 //
+//    @Autowired
+//    WakaTimeWork wakaTimeWork;
+//    public void history() {
+//        wakaTimeWork.historySeven();
+//    }
+//
 //
 //    public HashMap<String, List<HeartRest>> inst() {
 //        String[] ds = {
