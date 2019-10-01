@@ -1,6 +1,6 @@
 package com.huifer.jenkinsspringboot.mapper;
 
-import com.huifer.jenkinsspringboot.entity.UserApiPO;
+import com.huifer.jenkinsspringboot.entity.db.UserApiPO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

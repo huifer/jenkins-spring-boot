@@ -1,20 +1,22 @@
 package com.huifer.jenkinsspringboot.mapper;
 
-import com.huifer.jenkinsspringboot.entity.WakaUserinfo;
+import com.huifer.jenkinsspringboot.entity.db.WakaUserinfoPO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface WakaUserinfoMapper {
     int deleteByPrimaryKey(String apiKey);
 
-    int insert(WakaUserinfo record);
+    int insert(WakaUserinfoPO record);
 
-    int insertSelective(WakaUserinfo record);
+    int insertSelective(WakaUserinfoPO record);
 
-    WakaUserinfo selectByPrimaryKey(String apiKey);
+    WakaUserinfoPO selectByPrimaryKey(String apiKey);
 
-    int updateByPrimaryKeySelective(WakaUserinfo record);
+    int updateByPrimaryKeySelective(WakaUserinfoPO record);
 
-    int updateByPrimaryKey(WakaUserinfo record);
+    int updateByPrimaryKey(WakaUserinfoPO record);
+
+
 
 }

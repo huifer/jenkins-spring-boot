@@ -39,4 +39,14 @@ public class DateUtils {
         return yest;
     }
 
+    /**
+     * 返回事时间描述
+     *
+     * @param hours
+     * @param minutes
+     * @return xxx小时 xxx分钟
+     */
+    public static String timeText(int hours, int minutes) {
+        return String.format("%d 小时 %d分钟", hours, minutes);
+    }
 }

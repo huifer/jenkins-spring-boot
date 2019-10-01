@@ -1,7 +1,9 @@
 package com.huifer.jenkinsspringboot.mapper;
 
-import com.huifer.jenkinsspringboot.entity.ProjectPO;
+import com.huifer.jenkinsspringboot.entity.db.ProjectPO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface ProjectPOMapper {
@@ -16,4 +18,6 @@ public interface ProjectPOMapper {
     int updateByPrimaryKeySelective(ProjectPO record);
 
     int updateByPrimaryKey(ProjectPO record);
+
+    List<ProjectPO> findAll();
 }

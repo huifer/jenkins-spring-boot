@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huifer.jenkinsspringboot.mapper.UserApiPOMapper">
-  <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.UserApiPO">
+  <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.db.UserApiPO">
     <!--@mbg.generated-->
     <id column="id" jdbcType="INTEGER" property="id"/>
     <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -23,14 +23,14 @@
     delete from t_user_api
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.huifer.jenkinsspringboot.entity.UserApiPO">
+  <insert id="insert" parameterType="com.huifer.jenkinsspringboot.entity.db.UserApiPO">
     <!--@mbg.generated-->
     insert into t_user_api (id, `name`, api_key
     )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{apiKey,jdbcType=VARCHAR}
     )
   </insert>
-  <insert id="insertSelective" parameterType="com.huifer.jenkinsspringboot.entity.UserApiPO">
+  <insert id="insertSelective" parameterType="com.huifer.jenkinsspringboot.entity.db.UserApiPO">
     <!--@mbg.generated-->
     insert into t_user_api
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -56,7 +56,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huifer.jenkinsspringboot.entity.UserApiPO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.huifer.jenkinsspringboot.entity.db.UserApiPO">
     <!--@mbg.generated-->
     update t_user_api
     <set>
@@ -69,7 +69,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huifer.jenkinsspringboot.entity.UserApiPO">
+  <update id="updateByPrimaryKey" parameterType="com.huifer.jenkinsspringboot.entity.db.UserApiPO">
     <!--@mbg.generated-->
     update t_user_api
     set `name` = #{name,jdbcType=VARCHAR},

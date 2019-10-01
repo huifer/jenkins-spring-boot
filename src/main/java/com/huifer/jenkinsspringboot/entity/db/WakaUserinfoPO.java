@@ -1,11 +1,11 @@
-package com.huifer.jenkinsspringboot.entity;
+package com.huifer.jenkinsspringboot.entity.db;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class WakaUserinfo {
+public class WakaUserinfoPO {
     private String apiKey;
 
     private Date createdAt;

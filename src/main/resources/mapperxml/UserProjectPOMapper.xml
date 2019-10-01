@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huifer.jenkinsspringboot.mapper.UserProjectPOMapper">
-  <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.UserProjectPO">
+  <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.db.UserProjectPO">
     <!--@mbg.generated-->
     <id column="uid" jdbcType="INTEGER" property="uid"/>
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
@@ -29,7 +29,7 @@
     where `uid` = #{uid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="uid" keyProperty="uid"
-          parameterType="com.huifer.jenkinsspringboot.entity.UserProjectPO" useGeneratedKeys="true">
+          parameterType="com.huifer.jenkinsspringboot.entity.db.UserProjectPO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into t_user_project (created_at, html_escaped_name, id,
     `name`, repository, url,
@@ -39,7 +39,7 @@
     #{apiKey,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="uid" keyProperty="uid"
-          parameterType="com.huifer.jenkinsspringboot.entity.UserProjectPO" useGeneratedKeys="true">
+          parameterType="com.huifer.jenkinsspringboot.entity.db.UserProjectPO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into t_user_project
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -89,7 +89,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huifer.jenkinsspringboot.entity.UserProjectPO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.huifer.jenkinsspringboot.entity.db.UserProjectPO">
     <!--@mbg.generated-->
     update t_user_project
     <set>
@@ -117,7 +117,7 @@
     </set>
     where `uid` = #{uid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huifer.jenkinsspringboot.entity.UserProjectPO">
+  <update id="updateByPrimaryKey" parameterType="com.huifer.jenkinsspringboot.entity.db.UserProjectPO">
 
     <!--@mbg.generated-->
     update t_user_project

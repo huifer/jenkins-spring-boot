@@ -1,4 +1,4 @@
-package com.huifer.jenkinsspringboot.entity;
+package com.huifer.jenkinsspringboot.entity.db;
 
 import lombok.Data;
 
@@ -40,4 +40,6 @@ public class HistorySevenPO {
      * <float: total coding activity as seconds>,
      */
     private BigDecimal totalSeconds;
+
+    private String apiKey;
 }

@@ -1,7 +1,7 @@
 package com.huifer.jenkinsspringboot.service.spider;
 
-import com.huifer.jenkinsspringboot.entity.UserApiPO;
-import com.huifer.jenkinsspringboot.entity.WakaUserinfo;
+import com.huifer.jenkinsspringboot.entity.db.UserApiPO;
+import com.huifer.jenkinsspringboot.entity.db.WakaUserinfoPO;
 import com.huifer.jenkinsspringboot.mapper.UserApiPOMapper;
 import com.huifer.jenkinsspringboot.mapper.WakaUserinfoMapper;
 import com.huifer.jenkinsspringboot.util.DateUtils;
@@ -49,13 +49,13 @@ public class WakaTimeWork {
     public void updateWakaTimeUserInfo() {
         List<UserApiPO> userApiList = userApiPOMapper.findAll();
         for (UserApiPO userApiPO : userApiList) {
-            WakaUserinfo wakaUserinfo = wakaSpider.userInfo(userApiPO.getApiKey());
-            wakaUserinfo.setUpdateTime(new Date());
-            WakaUserinfo dbInfo = wakaUserinfoMapper.selectByPrimaryKey(wakaUserinfo.getApiKey());
+            WakaUserinfoPO wakaUserinfoPO = wakaSpider.userInfo(userApiPO.getApiKey());
+            wakaUserinfoPO.setUpdateTime(new Date());
+            WakaUserinfoPO dbInfo = wakaUserinfoMapper.selectByPrimaryKey(wakaUserinfoPO.getApiKey());
             if (dbInfo != null) {
-                wakaUserinfoMapper.updateByPrimaryKey(wakaUserinfo);
+                wakaUserinfoMapper.updateByPrimaryKey(wakaUserinfoPO);
             } else {
-                wakaUserinfoMapper.insert(wakaUserinfo);
+                wakaUserinfoMapper.insert(wakaUserinfoPO);
             }
         }
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huifer.jenkinsspringboot.mapper.HeartPOMapper">
-  <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.HeartPO">
+  <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.db.HeartPO">
     <!--@mbg.generated-->
     <result column="pro_user_id" jdbcType="INTEGER" property="proUserId" />
     <result column="branch" jdbcType="VARCHAR" property="branch" />
@@ -24,7 +24,7 @@
     <result column="entity" jdbcType="VARCHAR" property="entity" />
     <result column="day" jdbcType="VARCHAR" property="day" />
   </resultMap>
-  <insert id="insert" parameterType="com.huifer.jenkinsspringboot.entity.HeartPO">
+  <insert id="insert" parameterType="com.huifer.jenkinsspringboot.entity.db.HeartPO">
     <!--@mbg.generated-->
     insert into t_heart (pro_user_id, branch, category, 
       created_at, cursorpos, dependencies, 
@@ -41,7 +41,7 @@
       #{userAgentId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{entity,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.huifer.jenkinsspringboot.entity.HeartPO">
+  <insert id="insertSelective" parameterType="com.huifer.jenkinsspringboot.entity.db.HeartPO">
     <!--@mbg.generated-->
     insert into t_heart
     <trim prefix="(" suffix=")" suffixOverrides=",">

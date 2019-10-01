@@ -1,6 +1,6 @@
 package com.huifer.jenkinsspringboot.mapper;
 
-import com.huifer.jenkinsspringboot.entity.UserProjectPO;
+import com.huifer.jenkinsspringboot.entity.db.UserProjectPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

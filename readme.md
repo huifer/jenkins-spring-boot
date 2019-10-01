@@ -21,6 +21,8 @@ jenkins 部署运行sprin-boot项目
     
 - 数据统计
     - 按照项目,人员统计
+        `com.huifer.jenkinsspringboot.entity.result.ProjectWithUser`
+        `com.huifer.jenkinsspringboot.service.query.WakaTimeQuery.statisticsProjectByUser`
         ```json
         {
         "项目名称": "xxx",
@@ -31,6 +33,7 @@ jenkins 部署运行sprin-boot项目
         }
         ```
     - 个人项目时间统计
+        `com.huifer.jenkinsspringboot.entity.result.UserProject`
         ```json
         {
           "用户id": "1",
@@ -42,6 +45,7 @@ jenkins 部署运行sprin-boot项目
         }
         ```
     - 按日期统计
+        `com.huifer.jenkinsspringboot.entity.result.DayInfo`
         ```json
         {
           "日期": "2019-09-30",

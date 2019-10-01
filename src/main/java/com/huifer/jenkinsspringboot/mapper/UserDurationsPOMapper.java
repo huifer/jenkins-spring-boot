@@ -1,6 +1,6 @@
 package com.huifer.jenkinsspringboot.mapper;
 
-import com.huifer.jenkinsspringboot.entity.UserDurationsPO;
+import com.huifer.jenkinsspringboot.entity.db.UserDurationsPO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

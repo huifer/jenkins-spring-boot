@@ -1,4 +1,4 @@
-package com.huifer.jenkinsspringboot.entity;
+package com.huifer.jenkinsspringboot.entity.db;
 
 import java.util.Date;
 import lombok.Data;

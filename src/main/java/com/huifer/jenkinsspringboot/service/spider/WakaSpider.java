@@ -3,7 +3,7 @@ package com.huifer.jenkinsspringboot.service.spider;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.huifer.jenkinsspringboot.config.WakaApiUrlConfig;
-import com.huifer.jenkinsspringboot.entity.*;
+import com.huifer.jenkinsspringboot.entity.db.*;
 import com.huifer.jenkinsspringboot.entity.wakarest.DurationsRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.HeartRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.HistorySeven;
@@ -63,12 +63,16 @@ public class WakaSpider {
     }
 
 
-    public void getAndSetHistorySeven(String apiKey) {
-        HistorySeven historySeven = historySeven(apiKey);
-        insertHistorySeven(historySeven);
+    public void deletHistory(String apiKey) {
+        historySevenPOMapper.deleteByApiKey(apiKey);
     }
 
-    private void insertHistorySeven(HistorySeven historySeven) {
+    public void getAndSetHistorySeven(String apiKey) {
+        HistorySeven historySeven = historySeven(apiKey);
+        insertHistorySeven(historySeven, apiKey);
+    }
+
+    private void insertHistorySeven(HistorySeven historySeven, String apiKey) {
         List<HistorySeven.DataBean.ProjectsBean> projects = historySeven.getData().getProjects();
 
         for (HistorySeven.DataBean.ProjectsBean project : projects) {
@@ -80,13 +84,21 @@ public class WakaSpider {
             historySevenPO.setPercent(new BigDecimal(project.getPercent()));
             historySevenPO.setText("");
             historySevenPO.setTotalSeconds(new BigDecimal(project.getTotalSeconds()));
+            historySevenPO.setApiKey(apiKey);
             insertHistoryProject(historySevenPO);
         }
     }
 
     @Transactional(rollbackFor = Exception.class)
     public void insertHistoryProject(HistorySevenPO historySevenPO) {
-        historySevenPOMapper.insert(historySevenPO);
+
+
+        HistorySevenPO byApiKeyAndProName = historySevenPOMapper.findByApiKeyAndProName(historySevenPO.getApiKey(), historySevenPO.getName());
+        if (byApiKeyAndProName == null) {
+            historySevenPOMapper.insert(historySevenPO);
+        } else {
+            historySevenPOMapper.updateByApiKeyAndName(historySevenPO);
+        }
     }
 
 
@@ -96,7 +108,7 @@ public class WakaSpider {
      * @param apiKey
      * @return
      */
-    public WakaUserinfo userInfo(String apiKey) {
+    public WakaUserinfoPO userInfo(String apiKey) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("api_key", apiKey);
         ResponseEntity<String> exchange = restTemplate.exchange(
@@ -109,9 +121,9 @@ public class WakaSpider {
         String body = exchange.getBody();
         JSONObject object = JSONObject.parseObject(body);
         JSONObject data = object.getJSONObject("data");
-        WakaUserinfo wakaUserinfo = data.toJavaObject(WakaUserinfo.class);
-        wakaUserinfo.setApiKey(apiKey);
-        return wakaUserinfo;
+        WakaUserinfoPO wakaUserinfoPO = data.toJavaObject(WakaUserinfoPO.class);
+        wakaUserinfoPO.setApiKey(apiKey);
+        return wakaUserinfoPO;
     }
 
 
