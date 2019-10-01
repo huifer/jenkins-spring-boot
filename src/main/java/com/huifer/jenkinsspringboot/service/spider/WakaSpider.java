@@ -3,15 +3,13 @@ package com.huifer.jenkinsspringboot.service.spider;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.huifer.jenkinsspringboot.config.WakaApiUrlConfig;
-import com.huifer.jenkinsspringboot.entity.HeartPO;
-import com.huifer.jenkinsspringboot.entity.UserDurationsPO;
-import com.huifer.jenkinsspringboot.entity.UserProjectPO;
-import com.huifer.jenkinsspringboot.entity.WakaUserinfo;
+import com.huifer.jenkinsspringboot.entity.*;
 import com.huifer.jenkinsspringboot.entity.wakarest.DurationsRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.HeartRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.HistorySeven;
 import com.huifer.jenkinsspringboot.entity.wakarest.ProjectRest;
 import com.huifer.jenkinsspringboot.mapper.HeartPOMapper;
+import com.huifer.jenkinsspringboot.mapper.HistorySevenPOMapper;
 import com.huifer.jenkinsspringboot.mapper.UserDurationsPOMapper;
 import com.huifer.jenkinsspringboot.mapper.UserProjectPOMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +43,8 @@ public class WakaSpider {
     @Autowired
     private UserDurationsPOMapper userDurationsMapper;
 
+    @Autowired
+    private HistorySevenPOMapper historySevenPOMapper;
 
     public HistorySeven historySeven(String apiKey) {
         Map<String, Object> maps = new HashMap<>();
@@ -59,6 +60,33 @@ public class WakaSpider {
         JSONObject object = JSONObject.parseObject(body);
         HistorySeven historySeven = object.toJavaObject(HistorySeven.class);
         return historySeven;
+    }
+
+
+    public void getAndSetHistorySeven(String apiKey) {
+        HistorySeven historySeven = historySeven(apiKey);
+        insertHistorySeven(historySeven);
+    }
+
+    private void insertHistorySeven(HistorySeven historySeven) {
+        List<HistorySeven.DataBean.ProjectsBean> projects = historySeven.getData().getProjects();
+
+        for (HistorySeven.DataBean.ProjectsBean project : projects) {
+            HistorySevenPO historySevenPO = new HistorySevenPO();
+            historySevenPO.setDigital(project.getDigital());
+            historySevenPO.setHours(project.getHours());
+            historySevenPO.setMinutes(project.getMinutes());
+            historySevenPO.setName(project.getName());
+            historySevenPO.setPercent(new BigDecimal(project.getPercent()));
+            historySevenPO.setText("");
+            historySevenPO.setTotalSeconds(new BigDecimal(project.getTotalSeconds()));
+            insertHistoryProject(historySevenPO);
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void insertHistoryProject(HistorySevenPO historySevenPO) {
+        historySevenPOMapper.insert(historySevenPO);
     }
 
 
@@ -86,6 +114,12 @@ public class WakaSpider {
         return wakaUserinfo;
     }
 
+
+    public void getAndSetProjects(String apiKey) {
+        ProjectRest projects = projects(apiKey);
+        insertUserProject(apiKey, projects);
+    }
+
     /**
      * 访问projects接口
      *
@@ -107,7 +141,6 @@ public class WakaSpider {
         JSONObject object = JSONObject.parseObject(body);
         ProjectRest projectRest = object.toJavaObject(ProjectRest.class);
 
-        insertUserProject(apiKey, projectRest);
         return projectRest;
     }
 
@@ -143,24 +176,16 @@ public class WakaSpider {
     }
 
 
-    public DurationsRest durations(String date, String apiKey, Integer proUserId) {
-        Map<String, Object> maps = new HashMap<>();
-        maps.put("date", date);
-        maps.put("api_key", apiKey);
-        log.info("访问 durations 接口参数={}", maps);
-        ResponseEntity<String> forEntity = restTemplate.exchange(
-                wakaApiUrlConfig.getDurationUrl() + "?date={date}&api_key={api_key}",
-                HttpMethod.GET,
-                HttpEntity.EMPTY,
-                String.class,
-                maps
-        );
-        String body = forEntity.getBody();
-        JSONObject object = JSONObject.parseObject(body);
-        DurationsRest durationsRest = object.toJavaObject(DurationsRest.class);
+    /**
+     * 访问durations并且设置数据库
+     *
+     * @param date
+     * @param apiKey
+     * @param proUserId
+     */
+    public void getAndSetDurations(String date, String apiKey, Integer proUserId) {
+        DurationsRest durationsRest = durations(date, apiKey, proUserId);
         List<DurationsRest.DurationsRestData> data = durationsRest.getData();
-
-
         for (DurationsRest.DurationsRestData datum : data) {
             UserDurationsPO userDurationsPO = new UserDurationsPO();
             userDurationsPO.setCreatedAt(datum.getCreated_at());
@@ -177,12 +202,44 @@ public class WakaSpider {
             insertDuration(userDurationsPO);
         }
 
+    }
+
+    public DurationsRest durations(String date, String apiKey, Integer proUserId) {
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("date", date);
+        maps.put("api_key", apiKey);
+        log.info("访问 durations 接口参数={}", maps);
+        ResponseEntity<String> forEntity = restTemplate.exchange(
+                wakaApiUrlConfig.getDurationUrl() + "?date={date}&api_key={api_key}",
+                HttpMethod.GET,
+                HttpEntity.EMPTY,
+                String.class,
+                maps
+        );
+        String body = forEntity.getBody();
+        JSONObject object = JSONObject.parseObject(body);
+        DurationsRest durationsRest = object.toJavaObject(DurationsRest.class);
+
+
         return durationsRest;
     }
 
     @Transactional(rollbackFor = Exception.class)
     public void insertDuration(UserDurationsPO userDurations) {
         userDurationsMapper.insert(userDurations);
+    }
+
+    /**
+     * 访问heart接口并且放入数据库
+     *
+     * @param date
+     * @param apiKey
+     * @param proUserId
+     */
+    public void getAndSetHeart(String date, String apiKey, Integer proUserId) {
+        List<HeartRest> heart = heart(date, apiKey, proUserId);
+        insertListHeartRest(proUserId, heart, date);
+
     }
 
     /**
@@ -207,11 +264,9 @@ public class WakaSpider {
         JSONObject object = JSONObject.parseObject(body);
         JSONArray data = object.getJSONArray("data");
         List<HeartRest> result = data.toJavaList(HeartRest.class);
-        insertListHeartRest(proUserId, result, date);
-
-
         return result;
     }
+
 
     /**
      * 写入数据库

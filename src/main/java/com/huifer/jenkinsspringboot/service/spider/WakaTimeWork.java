@@ -32,6 +32,16 @@ public class WakaTimeWork {
     @Autowired
     private WakaUserinfoMapper wakaUserinfoMapper;
 
+
+    @Transactional(rollbackFor = Exception.class)
+    public void historySeven() {
+        List<UserApiPO> userApiList = userApiPOMapper.findAll();
+        for (UserApiPO userApiPO : userApiList) {
+            wakaSpider.getAndSetHistorySeven(userApiPO.getApiKey());
+        }
+    }
+
+
     /**
      * 更新用户信息
      */
@@ -58,7 +68,7 @@ public class WakaTimeWork {
     public void updateWakaHeart() {
         List<UserApiPO> userApiList = userApiPOMapper.findAll();
         for (UserApiPO userInfo : userApiList) {
-            wakaSpider.heart(DateUtils.getYestday(), userInfo.getApiKey(), userInfo.getId());
+            wakaSpider.getAndSetHeart(DateUtils.getYestday(), userInfo.getApiKey(), userInfo.getId());
         }
     }
 
@@ -69,7 +79,7 @@ public class WakaTimeWork {
     public void updateWakaProject() {
         List<UserApiPO> userApiList = userApiPOMapper.findAll();
         for (UserApiPO userApiPO : userApiList) {
-            wakaSpider.projects(userApiPO.getApiKey());
+            wakaSpider.getAndSetProjects(userApiPO.getApiKey());
         }
     }
 
@@ -80,8 +90,17 @@ public class WakaTimeWork {
     public void updateDurations() {
         List<UserApiPO> userApiList = userApiPOMapper.findAll();
         for (UserApiPO userApiPO : userApiList) {
-            wakaSpider.durations(DateUtils.getYestday(), userApiPO.getApiKey(), userApiPO.getId());
+            wakaSpider.getAndSetDurations(DateUtils.getYestday(), userApiPO.getApiKey(), userApiPO.getId());
         }
+    }
+
+    /**
+     * 七日历史记录
+     */
+    @Scheduled(cron = "0 5  0 1/7 * ?")
+    public void history() {
+        log.info("开始执行定时任务:下载history Seven 数据");
+        this.historySeven();
     }
 
     /**
