@@ -46,6 +46,7 @@ jenkins 部署运行sprin-boot项目
         ```
     - 按日期统计
         `com.huifer.jenkinsspringboot.entity.result.DayInfo`
+        - https://wakatime.com/api/v1/users/current/summaries?start=2019-09-30&end=2019-09-30
         ```json
         {
           "日期": "2019-09-30",

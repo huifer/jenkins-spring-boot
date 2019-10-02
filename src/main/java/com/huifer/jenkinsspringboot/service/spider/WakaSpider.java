@@ -46,6 +46,9 @@ public class WakaSpider {
     @Autowired
     private HistorySevenPOMapper historySevenPOMapper;
 
+
+
+
     public HistorySeven historySeven(String apiKey) {
         Map<String, Object> maps = new HashMap<>();
         maps.put("api_key", apiKey);
