@@ -41,6 +41,15 @@ public class WakaTimeWork {
         }
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void summary() {
+        List<UserApiPO> userApiList = userApiPOMapper.findAll();
+        for (UserApiPO userApiPO : userApiList) {
+            wakaSpider.getAndSetSummary(userApiPO.getApiKey(), DateUtils.getYestday());
+        }
+
+    }
+
 
     /**
      * 更新用户信息
@@ -102,6 +111,16 @@ public class WakaTimeWork {
         log.info("开始执行定时任务:下载history Seven 数据");
         this.historySeven();
     }
+
+    /**
+     * 每天00:05:00 启动下载project数据
+     */
+    @Scheduled(cron = "0 5 0 * * ? ")
+    public void wakaSummary() {
+        log.info("开始执行定时任务:下载 summary 数据");
+        this.summary();
+    }
+
 
     /**
      * 每天00:05:00 启动下载project数据

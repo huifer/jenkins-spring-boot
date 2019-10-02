@@ -12,6 +12,10 @@ public class WakaSpiderTest {
     @Autowired
     private WakaSpider wakaSpider;
 
+    @Test
+    public void summary() {
+        wakaSpider.getAndSetSummary("16e493aa-9ba5-4a40-bcd5-f105bf9522b6", "2019-09-30");
+    }
 
     @Test
     public void historySeven() {

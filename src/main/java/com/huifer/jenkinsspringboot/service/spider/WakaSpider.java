@@ -4,14 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.huifer.jenkinsspringboot.config.WakaApiUrlConfig;
 import com.huifer.jenkinsspringboot.entity.db.*;
+import com.huifer.jenkinsspringboot.entity.result.SummaryRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.DurationsRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.HeartRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.HistorySeven;
 import com.huifer.jenkinsspringboot.entity.wakarest.ProjectRest;
-import com.huifer.jenkinsspringboot.mapper.HeartPOMapper;
-import com.huifer.jenkinsspringboot.mapper.HistorySevenPOMapper;
-import com.huifer.jenkinsspringboot.mapper.UserDurationsPOMapper;
-import com.huifer.jenkinsspringboot.mapper.UserProjectPOMapper;
+import com.huifer.jenkinsspringboot.mapper.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -46,7 +44,157 @@ public class WakaSpider {
     @Autowired
     private HistorySevenPOMapper historySevenPOMapper;
 
+    @Autowired
+    private SummaryCatePOMapper summaryCatePOMapper;
+    @Autowired
+    private SummaryDependPOMapper summaryDependPOMapper;
+    @Autowired
+    private SummaryEditorPOMapper summaryEditorPOMapper;
+    @Autowired
+    private SummaryLanguagePOMapper summaryLanguagePOMapper;
+    @Autowired
+    private SummaryProjectPOMapper summaryProjectPOMapper;
 
+    /**
+     * 下载summary 数据
+     *
+     * @param apiKey
+     * @param startTime
+     */
+    public void getAndSetSummary(String apiKey, String startTime) {
+        SummaryRest.DataBean summary = summary(apiKey, startTime, startTime);
+        insertSummary(summary, apiKey, startTime);
+    }
+
+    /**
+     * 每日信息
+     *
+     * @param apiKey    apikey
+     * @param startTime yyyy-MM-dd
+     * @param endTime   yyyy-MM-dd
+     * @return
+     */
+    public SummaryRest.DataBean summary(String apiKey, String startTime, String endTime) {
+        Map<String, String> maps = new HashMap<>();
+        maps.put("api_key", apiKey);
+        maps.put("start", startTime);
+        maps.put("end", endTime);
+        ResponseEntity<String> exchange = restTemplate.exchange(
+                wakaApiUrlConfig.getSummaryUrl() + "?api_key={api_key}&start={start}&end={end}",
+                HttpMethod.GET,
+                HttpEntity.EMPTY,
+                String.class,
+                maps
+        );
+        String body = exchange.getBody();
+        JSONObject object = JSONObject.parseObject(body);
+        SummaryRest summaryRest = object.toJavaObject(SummaryRest.class);
+        SummaryRest.DataBean dataBean = summaryRest.getData().get(0);
+        return dataBean;
+    }
+
+    public void insertSummary(SummaryRest.DataBean summaryBean, String day, String apiKey) {
+        List<SummaryRest.DataBean.CategoriesBean> categories = summaryBean.getCategories();
+        List<SummaryRest.DataBean.DependenciesBean> dependencies = summaryBean.getDependencies();
+        List<SummaryRest.DataBean.EditorsBean> editors = summaryBean.getEditors();
+        List<SummaryRest.DataBean.LanguagesBean> languages = summaryBean.getLanguages();
+        List<SummaryRest.DataBean.ProjectsBean> projects = summaryBean.getProjects();
+
+        insertSummaryCategor(categories, day, apiKey);
+        insertSummaryDependency(dependencies, day, apiKey);
+        insertSummaryEditor(editors, day, apiKey);
+        insertSummaryLanguages(languages, day, apiKey);
+        insertSummaryProject(projects, day, apiKey);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void insertSummaryCategor(List<SummaryRest.DataBean.CategoriesBean> categories, String day, String apiKey) {
+        for (SummaryRest.DataBean.CategoriesBean category : categories) {
+            SummaryCatePO summaryCatePO = new SummaryCatePO();
+            summaryCatePO.setApiKey(apiKey);
+            summaryCatePO.setDay(day);
+            summaryCatePO.setDigital(category.getDigital());
+            summaryCatePO.setHours(category.getHours());
+            summaryCatePO.setMinutes(category.getMinutes());
+            summaryCatePO.setName(category.getName());
+            summaryCatePO.setPercent(category.getPercent());
+            summaryCatePO.setSeconds(category.getSeconds());
+            summaryCatePO.setText(category.getText());
+            summaryCatePO.setTotalSeconds(category.getTotalSeconds());
+
+            summaryCatePOMapper.insert(summaryCatePO);
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void insertSummaryDependency(List<SummaryRest.DataBean.DependenciesBean> dependencies, String day, String apiKey) {
+        for (SummaryRest.DataBean.DependenciesBean dependency : dependencies) {
+            SummaryDependPO summaryDependPO = new SummaryDependPO();
+            summaryDependPO.setApiKey(apiKey);
+            summaryDependPO.setDay(day);
+            summaryDependPO.setDigital(dependency.getDigital());
+            summaryDependPO.setHours(dependency.getHours());
+            summaryDependPO.setMinutes(dependency.getMinutes());
+            summaryDependPO.setName(dependency.getName());
+            summaryDependPO.setPercent(dependency.getPercent());
+            summaryDependPO.setSeconds(dependency.getSeconds());
+            summaryDependPO.setText(dependency.getText());
+            summaryDependPO.setTotalSeconds(dependency.getTotalSeconds());
+            summaryDependPOMapper.insert(summaryDependPO);
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void insertSummaryEditor(List<SummaryRest.DataBean.EditorsBean> editors, String day, String apiKey) {
+        for (SummaryRest.DataBean.EditorsBean editor : editors) {
+            SummaryEditorPO summaryEditorPO = new SummaryEditorPO();
+            summaryEditorPO.setApiKey(apiKey);
+            summaryEditorPO.setDay(day);
+            summaryEditorPO.setDigital(editor.getDigital());
+            summaryEditorPO.setHours(editor.getHours());
+            summaryEditorPO.setMinutes(editor.getMinutes());
+            summaryEditorPO.setName(editor.getName());
+            summaryEditorPO.setPercent(editor.getPercent());
+            summaryEditorPO.setSeconds(editor.getSeconds());
+            summaryEditorPO.setText(editor.getText());
+            summaryEditorPO.setTotalSeconds(editor.getTotalSeconds());
+            summaryEditorPOMapper.insert(summaryEditorPO);
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void insertSummaryLanguages(List<SummaryRest.DataBean.LanguagesBean> languages, String day, String apiKey) {
+        for (SummaryRest.DataBean.LanguagesBean language : languages) {
+            SummaryLanguagePO summaryLanguagePO = new SummaryLanguagePO();
+            summaryLanguagePO.setApiKey(apiKey);
+            summaryLanguagePO.setDay(day);
+            summaryLanguagePO.setDigital(language.getDigital());
+            summaryLanguagePO.setHours(language.getHours());
+            summaryLanguagePO.setMinutes(language.getMinutes());
+            summaryLanguagePO.setName(language.getName());
+            summaryLanguagePO.setPercent(language.getPercent());
+            summaryLanguagePO.setSeconds(language.getSeconds());
+            summaryLanguagePO.setText(language.getText());
+            summaryLanguagePO.setTotalSeconds(language.getTotalSeconds());
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void insertSummaryProject(List<SummaryRest.DataBean.ProjectsBean> projects, String day, String apiKey) {
+        for (SummaryRest.DataBean.ProjectsBean project : projects) {
+            SummaryProjectPO summaryProjectPO = new SummaryProjectPO();
+            summaryProjectPO.setApiKey(apiKey);
+            summaryProjectPO.setDay(day);
+            summaryProjectPO.setDigital(project.getDigital());
+            summaryProjectPO.setHours(project.getHours());
+            summaryProjectPO.setMinutes(project.getMinutes());
+            summaryProjectPO.setName(project.getName());
+            summaryProjectPO.setPercent(project.getPercent());
+            summaryProjectPO.setSeconds(project.getSeconds());
+            summaryProjectPO.setText(project.getText());
+            summaryProjectPO.setTotalSeconds(project.getTotalSeconds());
+        }
+    }
 
 
     public HistorySeven historySeven(String apiKey) {
@@ -184,8 +332,8 @@ public class WakaSpider {
 
     @Transactional(rollbackFor = Exception.class)
     public void insertUserPro(UserProjectPO userProjectPO) {
-        UserProjectPO upro = userProjectMapper.findAllConditions(userProjectPO);
-        if (upro == null) {
+        UserProjectPO uPro = userProjectMapper.findAllConditions(userProjectPO);
+        if (uPro == null) {
             userProjectMapper.insert(userProjectPO);
         }
     }
@@ -234,8 +382,6 @@ public class WakaSpider {
         String body = forEntity.getBody();
         JSONObject object = JSONObject.parseObject(body);
         DurationsRest durationsRest = object.toJavaObject(DurationsRest.class);
-
-
         return durationsRest;
     }
 
@@ -317,7 +463,6 @@ public class WakaSpider {
                         insertHeart(heartpo);
                     } catch (Exception e) {
                         log.error("异常={}", heartpo);
-                        e.printStackTrace();
                     }
 
                 }
