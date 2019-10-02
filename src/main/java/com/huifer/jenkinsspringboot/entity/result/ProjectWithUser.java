@@ -19,7 +19,7 @@ public class ProjectWithUser {
      * 项目名词
      */
     private String projectNanme;
-
+    private String day;
     /**
      * 数据列表
      */

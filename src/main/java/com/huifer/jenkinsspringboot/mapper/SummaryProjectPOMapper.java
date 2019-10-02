@@ -3,6 +3,8 @@ package com.huifer.jenkinsspringboot.mapper;
 import com.huifer.jenkinsspringboot.entity.db.SummaryProjectPO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface SummaryProjectPOMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,6 @@ public interface SummaryProjectPOMapper {
     int updateByPrimaryKeySelective(SummaryProjectPO record);
 
     int updateByPrimaryKey(SummaryProjectPO record);
+
+    List<SummaryProjectPO> findByApiKeyAndName();
 }

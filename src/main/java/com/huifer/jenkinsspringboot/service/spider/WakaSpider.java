@@ -63,7 +63,7 @@ public class WakaSpider {
      */
     public void getAndSetSummary(String apiKey, String startTime) {
         SummaryRest.DataBean summary = summary(apiKey, startTime, startTime);
-        insertSummary(summary, apiKey, startTime);
+        insertSummary(summary, startTime, apiKey);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.huifer.jenkinsspringboot.controller;
 
+import com.huifer.jenkinsspringboot.entity.result.ProjectWithUser;
 import com.huifer.jenkinsspringboot.entity.wakarest.DurationsRest;
 import com.huifer.jenkinsspringboot.entity.wakarest.HistorySeven;
 import com.huifer.jenkinsspringboot.entity.wakarest.ProjectRest;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Date: 2019-09-30
@@ -28,7 +31,10 @@ public class WakaTimeController {
     @Autowired
     private WakaTimeQuery wakaTimeQuery;
 
-
+    @GetMapping("/proj_by_user")
+    public List<ProjectWithUser> statisticsProjectByUser() {
+        return wakaTimeQuery.statisticsProjectByUser();
+    }
 
 
     @ApiOperation(value = "xxx日期下的开发时间", response = DurationsRest.class)

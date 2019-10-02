@@ -2,6 +2,7 @@ package com.huifer.jenkinsspringboot.mapper;
 
 import com.huifer.jenkinsspringboot.entity.db.UserApiPO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +22,7 @@ public interface UserApiPOMapper {
 
 
     List<UserApiPO> findAll();
+
+    String findByApiKey(@Param("apiKey") String apiKey);
+
 }

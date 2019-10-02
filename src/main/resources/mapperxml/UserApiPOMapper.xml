@@ -81,4 +81,7 @@
     <include refid="Base_Column_List"/>
     from t_user_api
   </select>
+  <select id="findByApiKey" resultType="java.lang.String">
+    select name from t_user_api where api_key=#{apiKey}
+  </select>
 </mapper>
