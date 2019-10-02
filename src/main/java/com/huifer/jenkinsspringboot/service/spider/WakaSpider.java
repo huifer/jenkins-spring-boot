@@ -176,6 +176,7 @@ public class WakaSpider {
             summaryLanguagePO.setSeconds(language.getSeconds());
             summaryLanguagePO.setText(language.getText());
             summaryLanguagePO.setTotalSeconds(language.getTotalSeconds());
+            summaryLanguagePOMapper.insert(summaryLanguagePO);
         }
     }
 
@@ -193,6 +194,7 @@ public class WakaSpider {
             summaryProjectPO.setSeconds(project.getSeconds());
             summaryProjectPO.setText(project.getText());
             summaryProjectPO.setTotalSeconds(project.getTotalSeconds());
+            summaryProjectPOMapper.insert(summaryProjectPO);
         }
     }
 

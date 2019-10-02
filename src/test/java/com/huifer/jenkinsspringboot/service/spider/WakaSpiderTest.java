@@ -14,7 +14,22 @@ public class WakaSpiderTest {
 
     @Test
     public void summary() {
-        wakaSpider.getAndSetSummary("16e493aa-9ba5-4a40-bcd5-f105bf9522b6", "2019-09-30");
+        String[] ds = {
+                "2019-09-21",
+                "2019-09-22",
+                "2019-09-23",
+                "2019-09-24",
+                "2019-09-25",
+                "2019-09-26",
+                "2019-09-27",
+                "2019-09-28",
+                "2019-09-29",
+                "2019-09-30",
+        };
+        for (String d : ds) {
+
+            wakaSpider.getAndSetSummary("16e493aa-9ba5-4a40-bcd5-f105bf9522b6", d);
+        }
     }
 
     @Test
