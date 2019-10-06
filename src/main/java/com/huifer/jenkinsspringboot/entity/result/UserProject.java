@@ -1,10 +1,9 @@
 package com.huifer.jenkinsspringboot.entity.result;
 
-import com.huifer.jenkinsspringboot.entity.db.WakaUserinfoPO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * 描述:
@@ -25,12 +24,26 @@ public class UserProject {
      */
     private String name;
     /**
-     * 用户信息
+     * 日期
      */
-    private WakaUserinfoPO userInfo;
+    private String day;
+
+    private String userName;
+
     /**
-     * 数据信息
+     * 开发小时数
      */
-    private List<ProjectInfo> data;
+    private BigDecimal hours;
+    /**
+     * 开发分钟数
+     */
+    private BigDecimal minutes;
+    /**
+     * hours 小时 + minutes 分钟
+     */
+    private String text;
+
+    private BigDecimal totalSeconds;
+    private long timestamp;
 
 }

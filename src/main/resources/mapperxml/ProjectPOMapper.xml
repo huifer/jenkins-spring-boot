@@ -63,7 +63,16 @@
     set project_name = #{projectName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="findAll" resultMap="BaseResultMap" resultType="list">
+  <select id="findByName" resultMap="BaseResultMap" resultType="list">
+    select
+    <include refid="Base_Column_List"/>
+    from t_project
+    where
+    <if test="projectName != null and projectName != ''">
+      project_name=#{projectName}
+    </if>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from t_project

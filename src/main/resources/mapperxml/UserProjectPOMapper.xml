@@ -136,7 +136,7 @@
     <include refid="Base_Column_List"/>
     from t_user_project
     where created_at=#{userProjectPO.createdAt} and html_escaped_name=#{userProjectPO.htmlEscapedName} and
-    id=#{userProjectPO.id} and `name`=#{userProjectPO.name}  and
+    id=#{userProjectPO.id} and `name`=#{userProjectPO.name} and
     url=#{userProjectPO.url} and api_key=#{userProjectPO.apiKey}
   </select>
 

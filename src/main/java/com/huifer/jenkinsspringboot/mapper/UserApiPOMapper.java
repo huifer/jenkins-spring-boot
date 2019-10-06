@@ -23,6 +23,6 @@ public interface UserApiPOMapper {
 
     List<UserApiPO> findAll();
 
-    String findByApiKey(@Param("apiKey") String apiKey);
+    UserApiPO findByApiKey(@Param("apiKey") String apiKey);
 
 }

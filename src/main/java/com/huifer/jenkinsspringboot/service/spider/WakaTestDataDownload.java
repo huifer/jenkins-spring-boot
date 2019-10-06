@@ -1,7 +1,7 @@
 package com.huifer.jenkinsspringboot.service.spider;
 
-import com.huifer.jenkinsspringboot.entity.wakarest.HeartRest;
 import com.huifer.jenkinsspringboot.entity.db.UserApiPO;
+import com.huifer.jenkinsspringboot.entity.wakarest.HeartRest;
 import com.huifer.jenkinsspringboot.mapper.UserApiPOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +21,11 @@ import java.util.List;
 public class WakaTestDataDownload {
 
     @Autowired
+    WakaTimeWork wakaTimeWork;
+    @Autowired
     private UserApiPOMapper userApiPOMapper;
     @Autowired
     private WakaSpider wakaSpider;
-
-    @Autowired
-    WakaTimeWork wakaTimeWork;
 
     public void history() {
         wakaTimeWork.historySeven();

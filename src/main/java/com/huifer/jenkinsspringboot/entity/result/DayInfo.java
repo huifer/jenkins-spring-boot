@@ -3,7 +3,7 @@ package com.huifer.jenkinsspringboot.entity.result;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * 描述:
@@ -20,20 +20,19 @@ public class DayInfo {
      */
     private String date;
 
-    private List data;
 
-    @Data
-    @NoArgsConstructor
-    static class ProjInfo {
-        /**
-         * 项目名词
-         */
-        private String projectName;
+    /**
+     * 项目名词
+     */
+    private String projectName;
 
-        /**
-         * 开发时间
-         */
-        private String text;
-    }
+    /**
+     * 开发时间
+     */
+    private String text;
+
+    private BigDecimal totalSeconds;
+
+    private long timestamp;
 
 }

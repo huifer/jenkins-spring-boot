@@ -3,28 +3,28 @@
 <mapper namespace="com.huifer.jenkinsspringboot.mapper.UserDurationsPOMapper">
   <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.db.UserDurationsPO">
     <!--@mbg.generated-->
-    <id column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="cursorpos" jdbcType="VARCHAR" property="cursorpos" />
-    <result column="duration" jdbcType="DECIMAL" property="duration" />
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="lineno" jdbcType="VARCHAR" property="lineno" />
-    <result column="machine_name_id" jdbcType="VARCHAR" property="machineNameId" />
-    <result column="project" jdbcType="VARCHAR" property="project" />
-    <result column="time" jdbcType="DECIMAL" property="time" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="api_key" jdbcType="VARCHAR" property="apiKey" />
-    <result column="day" jdbcType="VARCHAR" property="day" />
+    <id column="uid" jdbcType="INTEGER" property="uid"/>
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
+    <result column="cursorpos" jdbcType="VARCHAR" property="cursorpos"/>
+    <result column="duration" jdbcType="DECIMAL" property="duration"/>
+    <result column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="lineno" jdbcType="VARCHAR" property="lineno"/>
+    <result column="machine_name_id" jdbcType="VARCHAR" property="machineNameId"/>
+    <result column="project" jdbcType="VARCHAR" property="project"/>
+    <result column="time" jdbcType="DECIMAL" property="time"/>
+    <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    <result column="api_key" jdbcType="VARCHAR" property="apiKey"/>
+    <result column="day" jdbcType="VARCHAR" property="day"/>
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    `uid`, created_at, cursorpos, duration, id, `lineno`, machine_name_id, project, `time`, 
+    `uid`, created_at, cursorpos, duration, id, `lineno`, machine_name_id, project, `time`,
     user_id, api_key, `day`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from t_user_durations
     where `uid` = #{uid,jdbcType=INTEGER}
   </select>
@@ -33,18 +33,20 @@
     delete from t_user_durations
     where `uid` = #{uid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="com.huifer.jenkinsspringboot.entity.db.UserDurationsPO" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="uid" keyProperty="uid"
+          parameterType="com.huifer.jenkinsspringboot.entity.db.UserDurationsPO" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into t_user_durations (created_at, cursorpos, duration, 
-      id, `lineno`, machine_name_id, 
-      project, `time`, user_id, 
-      api_key, `day`)
-    values (#{createdAt,jdbcType=TIMESTAMP}, #{cursorpos,jdbcType=VARCHAR}, #{duration,jdbcType=DECIMAL}, 
-      #{id,jdbcType=VARCHAR}, #{lineno,jdbcType=VARCHAR}, #{machineNameId,jdbcType=VARCHAR}, 
-      #{project,jdbcType=VARCHAR}, #{time,jdbcType=DECIMAL}, #{userId,jdbcType=VARCHAR}, 
-      #{apiKey,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR})
+    insert into t_user_durations (created_at, cursorpos, duration,
+    id, `lineno`, machine_name_id,
+    project, `time`, user_id,
+    api_key, `day`)
+    values (#{createdAt,jdbcType=TIMESTAMP}, #{cursorpos,jdbcType=VARCHAR}, #{duration,jdbcType=DECIMAL},
+    #{id,jdbcType=VARCHAR}, #{lineno,jdbcType=VARCHAR}, #{machineNameId,jdbcType=VARCHAR},
+    #{project,jdbcType=VARCHAR}, #{time,jdbcType=DECIMAL}, #{userId,jdbcType=VARCHAR},
+    #{apiKey,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="com.huifer.jenkinsspringboot.entity.db.UserDurationsPO" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="uid" keyProperty="uid"
+          parameterType="com.huifer.jenkinsspringboot.entity.db.UserDurationsPO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into t_user_durations
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -162,16 +164,16 @@
     <!--@mbg.generated-->
     update t_user_durations
     set created_at = #{createdAt,jdbcType=TIMESTAMP},
-      cursorpos = #{cursorpos,jdbcType=VARCHAR},
-      duration = #{duration,jdbcType=DECIMAL},
-      id = #{id,jdbcType=VARCHAR},
-      `lineno` = #{lineno,jdbcType=VARCHAR},
-      machine_name_id = #{machineNameId,jdbcType=VARCHAR},
-      project = #{project,jdbcType=VARCHAR},
-      `time` = #{time,jdbcType=DECIMAL},
-      user_id = #{userId,jdbcType=VARCHAR},
-      api_key = #{apiKey,jdbcType=VARCHAR},
-      `day` = #{day,jdbcType=VARCHAR}
+    cursorpos = #{cursorpos,jdbcType=VARCHAR},
+    duration = #{duration,jdbcType=DECIMAL},
+    id = #{id,jdbcType=VARCHAR},
+    `lineno` = #{lineno,jdbcType=VARCHAR},
+    machine_name_id = #{machineNameId,jdbcType=VARCHAR},
+    project = #{project,jdbcType=VARCHAR},
+    `time` = #{time,jdbcType=DECIMAL},
+    user_id = #{userId,jdbcType=VARCHAR},
+    api_key = #{apiKey,jdbcType=VARCHAR},
+    `day` = #{day,jdbcType=VARCHAR}
     where `uid` = #{uid,jdbcType=INTEGER}
   </update>
 </mapper>

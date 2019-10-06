@@ -36,7 +36,7 @@ public class RescueTimeSpider {
                 + "?key=" + apikey, String.class);
         String body = forEntity.getBody();
         List<DailySummaryFeedRest> dailySummaryFeedRests = JSONArray.parseArray(body, DailySummaryFeedRest.class);
-        log.info("每日摘要信息={}",dailySummaryFeedRests);
+        log.info("每日摘要信息={}", dailySummaryFeedRests);
         return dailySummaryFeedRests;
     }
 

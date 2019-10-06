@@ -1,9 +1,15 @@
 package com.huifer.jenkinsspringboot.util;
 
+import com.huifer.jenkinsspringboot.config.SettingVar;
+import lombok.extern.slf4j.Slf4j;
+
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 描述:
@@ -12,6 +18,7 @@ import java.util.Date;
  * @author huifer
  * @date 2019-09-30
  */
+@Slf4j
 public class DateUtils {
 
 
@@ -20,7 +27,43 @@ public class DateUtils {
     }
 
     public static void main(String[] args) {
-        getYestday();
+        getStart2End();
+    }
+
+    public static List<String> getStart2End() {
+        try {
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+            String dateStart = SettingVar.START_TIME;
+//            String dateEnd = date.format(new Date());
+            String dateEnd = SettingVar.END_TIME;
+            long startTime = date.parse(dateStart).getTime();
+            long endTime = date.parse(dateEnd).getTime();
+            long day = 1000 * 60 * 60 * 24;
+            List<String> res = new ArrayList<>();
+
+            for (long i = startTime; i <= endTime; i += day) {
+                String format = date.format(new Date(i));
+                res.add(format);
+            }
+            return res;
+        } catch (ParseException ex) {
+            log.error("日期格式化失败");
+        }
+        return null;
+    }
+
+
+    public static long day2timestamp(String day) {
+        try {
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = simpleDateFormat.parse(day);
+            long time = date.getTime();
+            return time;
+        } catch (ParseException e) {
+            log.error("日期格式化失败");
+        }
+        return 0;
     }
 
     /**

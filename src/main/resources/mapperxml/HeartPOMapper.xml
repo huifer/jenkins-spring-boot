@@ -3,43 +3,43 @@
 <mapper namespace="com.huifer.jenkinsspringboot.mapper.HeartPOMapper">
   <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.db.HeartPO">
     <!--@mbg.generated-->
-    <result column="pro_user_id" jdbcType="INTEGER" property="proUserId" />
-    <result column="branch" jdbcType="VARCHAR" property="branch" />
-    <result column="category" jdbcType="VARCHAR" property="category" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="cursorpos" jdbcType="VARCHAR" property="cursorpos" />
-    <result column="dependencies" jdbcType="VARCHAR" property="dependencies" />
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="is_write" jdbcType="VARCHAR" property="isWrite" />
-    <result column="language" jdbcType="VARCHAR" property="language" />
-    <result column="lineno" jdbcType="VARCHAR" property="lineno" />
-    <result column="lines" jdbcType="VARCHAR" property="lines" />
-    <result column="machine_name_id" jdbcType="VARCHAR" property="machineNameId" />
-    <result column="project" jdbcType="VARCHAR" property="project" />
-    <result column="time" jdbcType="DECIMAL" property="time" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="user_agent_id" jdbcType="VARCHAR" property="userAgentId" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="entity" jdbcType="VARCHAR" property="entity" />
-    <result column="day" jdbcType="VARCHAR" property="day" />
+    <result column="pro_user_id" jdbcType="INTEGER" property="proUserId"/>
+    <result column="branch" jdbcType="VARCHAR" property="branch"/>
+    <result column="category" jdbcType="VARCHAR" property="category"/>
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
+    <result column="cursorpos" jdbcType="VARCHAR" property="cursorpos"/>
+    <result column="dependencies" jdbcType="VARCHAR" property="dependencies"/>
+    <result column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="is_write" jdbcType="VARCHAR" property="isWrite"/>
+    <result column="language" jdbcType="VARCHAR" property="language"/>
+    <result column="lineno" jdbcType="VARCHAR" property="lineno"/>
+    <result column="lines" jdbcType="VARCHAR" property="lines"/>
+    <result column="machine_name_id" jdbcType="VARCHAR" property="machineNameId"/>
+    <result column="project" jdbcType="VARCHAR" property="project"/>
+    <result column="time" jdbcType="DECIMAL" property="time"/>
+    <result column="type" jdbcType="VARCHAR" property="type"/>
+    <result column="user_agent_id" jdbcType="VARCHAR" property="userAgentId"/>
+    <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <result column="entity" jdbcType="VARCHAR" property="entity"/>
+    <result column="day" jdbcType="VARCHAR" property="day"/>
   </resultMap>
   <insert id="insert" parameterType="com.huifer.jenkinsspringboot.entity.db.HeartPO">
     <!--@mbg.generated-->
-    insert into t_heart (pro_user_id, branch, category, 
-      created_at, cursorpos, dependencies, 
-      id, is_write, `language`, 
-      `lineno`, `lines`, machine_name_id, 
-      project, `time`, `type`, 
-      user_agent_id, user_id, update_time, 
-      entity, `day`)
-    values (#{proUserId,jdbcType=INTEGER}, #{branch,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{cursorpos,jdbcType=VARCHAR}, #{dependencies,jdbcType=VARCHAR}, 
-      #{id,jdbcType=VARCHAR}, #{isWrite,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
-      #{lineno,jdbcType=VARCHAR}, #{lines,jdbcType=VARCHAR}, #{machineNameId,jdbcType=VARCHAR}, 
-      #{project,jdbcType=VARCHAR}, #{time,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}, 
-      #{userAgentId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{entity,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR})
+    insert into t_heart (pro_user_id, branch, category,
+    created_at, cursorpos, dependencies,
+    id, is_write, `language`,
+    `lineno`, `lines`, machine_name_id,
+    project, `time`, `type`,
+    user_agent_id, user_id, update_time,
+    entity, `day`)
+    values (#{proUserId,jdbcType=INTEGER}, #{branch,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+    #{createdAt,jdbcType=TIMESTAMP}, #{cursorpos,jdbcType=VARCHAR}, #{dependencies,jdbcType=VARCHAR},
+    #{id,jdbcType=VARCHAR}, #{isWrite,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR},
+    #{lineno,jdbcType=VARCHAR}, #{lines,jdbcType=VARCHAR}, #{machineNameId,jdbcType=VARCHAR},
+    #{project,jdbcType=VARCHAR}, #{time,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR},
+    #{userAgentId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+    #{entity,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.huifer.jenkinsspringboot.entity.db.HeartPO">
     <!--@mbg.generated-->

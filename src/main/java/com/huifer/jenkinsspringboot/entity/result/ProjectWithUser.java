@@ -3,7 +3,7 @@ package com.huifer.jenkinsspringboot.entity.result;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * 描述:
@@ -16,13 +16,25 @@ import java.util.List;
 @NoArgsConstructor
 public class ProjectWithUser {
     /**
-     * 项目名词
+     * 项目名称
      */
     private String projectNanme;
     private String day;
     /**
-     * 数据列表
+     * 开发小时数
      */
-    private List<ProjectInfo> data;
+    private BigDecimal hours;
+    /**
+     * 开发分钟数
+     */
+    private BigDecimal minutes;
+    /**
+     * hours 小时 + minutes 分钟
+     */
+    private String text;
+
+    private BigDecimal totalSeconds;
+
+    private long timestamp;
 
 }

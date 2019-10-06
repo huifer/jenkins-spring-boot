@@ -25,6 +25,13 @@ wakatime:
   # 七日历史记录
   hository_seven: ${wakatime.base_url}/users/current/stats/last_7_days
 spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    cache: false
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
   jackson:
     #日期格式化
     date-format: yyyy-MM-dd HH:mm:ss
@@ -54,21 +61,23 @@ mybatis:
   mapper-locations: classpath:mapperxml/*Mapper.xml
   type-aliases-package: com.huifer.jenkinsspringboot.entity
 
+
 mybatis-plus:
   # xml
   mapper-locations: classpath:mapperxml/*Mapper.xml
   # 实体扫描，多个package用逗号或者分号分隔
   type-aliases-package: com.huifer.jenkinsspringboot.entity
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 
-
-logging:
-  level:
-    com:
-      huifer:
-        jenkinsspringboot:
-          mapper: debug
+#
+#logging:
+#  level:
+#    com:
+#      huifer:
+#        jenkinsspringboot:
+#          mapper: debug
 
 
 

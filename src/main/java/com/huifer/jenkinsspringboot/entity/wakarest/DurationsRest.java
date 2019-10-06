@@ -36,7 +36,7 @@ public class DurationsRest {
      */
     private String timezone;
 
-    @lombok.Data
+    @Data
     public static class DurationsRestData {
         /**
          * 创建时间<br/>
