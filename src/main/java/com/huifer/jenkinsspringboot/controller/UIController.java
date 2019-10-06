@@ -72,7 +72,6 @@ public class UIController {
             Model m,
             @PathVariable("apiKey") String apiKey
     ) {
-        HashMap<String, HashMap<String, Map<String, ProjectWithUser>>> stringHashMapHashMap = wakaTimeQuery.statisticsUser("", apiKey);
 
         m.addAttribute("apiKey", apiKey);
         m.addAttribute("pro", wakaTimeQuery.projectAll());
