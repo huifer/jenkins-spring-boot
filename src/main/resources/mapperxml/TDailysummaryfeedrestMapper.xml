@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huifer.jenkinsspringboot.mapper.TDailysummaryfeedrestMapper">
+  <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.db.TDailysummaryfeedrest">
+    <!--@mbg.generated-->
+    <id column="fid" jdbcType="INTEGER" property="fid"/>
+    <result column="date" jdbcType="TIMESTAMP" property="date"/>
+    <result column="productivity_pulse" jdbcType="DECIMAL" property="productivityPulse"/>
+    <result column="veryProductive_percentage" jdbcType="DECIMAL" property="veryproductivePercentage"/>
+    <result column="productive_percentage" jdbcType="DECIMAL" property="productivePercentage"/>
+    <result column="neutral_percentage" jdbcType="DECIMAL" property="neutralPercentage"/>
+    <result column="distracting_percentage" jdbcType="DECIMAL" property="distractingPercentage"/>
+    <result column="veryDistracting_percentage" jdbcType="DECIMAL" property="verydistractingPercentage"/>
+    <result column="allProductive_percentage" jdbcType="DECIMAL" property="allproductivePercentage"/>
+    <result column="allDistracting_percentage" jdbcType="DECIMAL" property="alldistractingPercentage"/>
+    <result column="uncategorized_percentage" jdbcType="DECIMAL" property="uncategorizedPercentage"/>
+    <result column="business_percentage" jdbcType="DECIMAL" property="businessPercentage"/>
+    <result column="communicationAndScheduling_percentage" jdbcType="DECIMAL"
+            property="communicationandschedulingPercentage"/>
+    <result column="socialNetworking_percentage" jdbcType="DECIMAL" property="socialnetworkingPercentage"/>
+    <result column="designAndComposition_percentage" jdbcType="DECIMAL" property="designandcompositionPercentage"/>
+    <result column="entertainment_percentage" jdbcType="DECIMAL" property="entertainmentPercentage"/>
+    <result column="news_percentage" jdbcType="DECIMAL" property="newsPercentage"/>
+    <result column="softwareDevelopment_percentage" jdbcType="DECIMAL" property="softwaredevelopmentPercentage"/>
+    <result column="referenceAndLearning_percentage" jdbcType="DECIMAL" property="referenceandlearningPercentage"/>
+    <result column="shopping_percentage" jdbcType="DECIMAL" property="shoppingPercentage"/>
+    <result column="utilities_percentage" jdbcType="DECIMAL" property="utilitiesPercentage"/>
+    <result column="total_hours" jdbcType="DECIMAL" property="totalHours"/>
+    <result column="veryProductive_hours" jdbcType="DECIMAL" property="veryproductiveHours"/>
+    <result column="productive_hours" jdbcType="DECIMAL" property="productiveHours"/>
+    <result column="neutral_hours" jdbcType="DECIMAL" property="neutralHours"/>
+    <result column="distracting_hours" jdbcType="DECIMAL" property="distractingHours"/>
+    <result column="veryDistracting_hours" jdbcType="DECIMAL" property="verydistractingHours"/>
+    <result column="allProductive_hours" jdbcType="DECIMAL" property="allproductiveHours"/>
+    <result column="allDistracting_hours" jdbcType="DECIMAL" property="alldistractingHours"/>
+    <result column="uncategorized_hours" jdbcType="DECIMAL" property="uncategorizedHours"/>
+    <result column="business_hours" jdbcType="DECIMAL" property="businessHours"/>
+    <result column="communicationAndScheduling_hours" jdbcType="DECIMAL" property="communicationandschedulingHours"/>
+    <result column="socialNetworking_hours" jdbcType="DECIMAL" property="socialnetworkingHours"/>
+    <result column="designAndComposition_hours" jdbcType="DECIMAL" property="designandcompositionHours"/>
+    <result column="entertainment_hours" jdbcType="DECIMAL" property="entertainmentHours"/>
+    <result column="news_hours" jdbcType="DECIMAL" property="newsHours"/>
+    <result column="softwareDevelopment_hours" jdbcType="DECIMAL" property="softwaredevelopmentHours"/>
+    <result column="referenceAndLearning_hours" jdbcType="DECIMAL" property="referenceandlearningHours"/>
+    <result column="shopping_hours" jdbcType="DECIMAL" property="shoppingHours"/>
+    <result column="utilities_hours" jdbcType="DECIMAL" property="utilitiesHours"/>
+    <result column="totalDuration_formatted" jdbcType="VARCHAR" property="totaldurationFormatted"/>
+    <result column="veryProductiveDuration_formatted" jdbcType="VARCHAR" property="veryproductivedurationFormatted"/>
+    <result column="productiveDuration_formatted" jdbcType="VARCHAR" property="productivedurationFormatted"/>
+    <result column="neutralDuration_formatted" jdbcType="VARCHAR" property="neutraldurationFormatted"/>
+    <result column="distractingDuration_formatted" jdbcType="VARCHAR" property="distractingdurationFormatted"/>
+    <result column="veryDistractingDuration_formatted" jdbcType="VARCHAR" property="verydistractingdurationFormatted"/>
+    <result column="allProductiveDuration_formatted" jdbcType="VARCHAR" property="allproductivedurationFormatted"/>
+    <result column="allDistractingDuration_formatted" jdbcType="VARCHAR" property="alldistractingdurationFormatted"/>
+    <result column="uncategorizedDuration_formatted" jdbcType="VARCHAR" property="uncategorizeddurationFormatted"/>
+    <result column="businessDuration_formatted" jdbcType="VARCHAR" property="businessdurationFormatted"/>
+    <result column="communicationAndSchedulingDuration_formatted" jdbcType="VARCHAR"
+            property="communicationandschedulingdurationFormatted"/>
+    <result column="socialNetworkingDuration_formatted" jdbcType="VARCHAR"
+            property="socialnetworkingdurationFormatted"/>
+    <result column="designAndCompositionDuration_formatted" jdbcType="VARCHAR"
+            property="designandcompositiondurationFormatted"/>
+    <result column="entertainmentDuration_formatted" jdbcType="VARCHAR" property="entertainmentdurationFormatted"/>
+    <result column="newsDuration_formatted" jdbcType="VARCHAR" property="newsdurationFormatted"/>
+    <result column="softwareDevelopmentDuration_formatted" jdbcType="VARCHAR"
+            property="softwaredevelopmentdurationFormatted"/>
+    <result column="referenceAndLearningDuration_formatted" jdbcType="VARCHAR"
+            property="referenceandlearningdurationFormatted"/>
+    <result column="shoppingDuration_formatted" jdbcType="VARCHAR" property="shoppingdurationFormatted"/>
+    <result column="utilitiesDuration_formatted" jdbcType="VARCHAR" property="utilitiesdurationFormatted"/>
+    <result column="id" jdbcType="INTEGER" property="id"/>
+    <result column="year" jdbcType="INTEGER" property="year"/>
+    <result column="month" jdbcType="INTEGER" property="month"/>
+    <result column="day" jdbcType="INTEGER" property="day"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    fid, `date`, productivity_pulse, veryProductive_percentage, productive_percentage,
+    neutral_percentage, distracting_percentage, veryDistracting_percentage, allProductive_percentage,
+    allDistracting_percentage, uncategorized_percentage, business_percentage, communicationAndScheduling_percentage,
+    socialNetworking_percentage, designAndComposition_percentage, entertainment_percentage,
+    news_percentage, softwareDevelopment_percentage, referenceAndLearning_percentage,
+    shopping_percentage, utilities_percentage, total_hours, veryProductive_hours, productive_hours,
+    neutral_hours, distracting_hours, veryDistracting_hours, allProductive_hours, allDistracting_hours,
+    uncategorized_hours, business_hours, communicationAndScheduling_hours, socialNetworking_hours,
+    designAndComposition_hours, entertainment_hours, news_hours, softwareDevelopment_hours,
+    referenceAndLearning_hours, shopping_hours, utilities_hours, totalDuration_formatted,
+    veryProductiveDuration_formatted, productiveDuration_formatted, neutralDuration_formatted,
+    distractingDuration_formatted, veryDistractingDuration_formatted, allProductiveDuration_formatted,
+    allDistractingDuration_formatted, uncategorizedDuration_formatted, businessDuration_formatted,
+    communicationAndSchedulingDuration_formatted, socialNetworkingDuration_formatted,
+    designAndCompositionDuration_formatted, entertainmentDuration_formatted, newsDuration_formatted,
+    softwareDevelopmentDuration_formatted, referenceAndLearningDuration_formatted, shoppingDuration_formatted,
+    utilitiesDuration_formatted, id, `year`, `month`, `day`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List"/>
+    from t_dailysummaryfeedrest
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_dailysummaryfeedrest
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="fid" keyProperty="fid"
+          parameterType="com.huifer.jenkinsspringboot.entity.db.TDailysummaryfeedrest" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_dailysummaryfeedrest (`date`, productivity_pulse, veryProductive_percentage,
+    productive_percentage, neutral_percentage,
+    distracting_percentage, veryDistracting_percentage,
+    allProductive_percentage, allDistracting_percentage,
+    uncategorized_percentage, business_percentage,
+    communicationAndScheduling_percentage, socialNetworking_percentage,
+    designAndComposition_percentage, entertainment_percentage,
+    news_percentage, softwareDevelopment_percentage,
+    referenceAndLearning_percentage, shopping_percentage,
+    utilities_percentage, total_hours, veryProductive_hours,
+    productive_hours, neutral_hours, distracting_hours,
+    veryDistracting_hours, allProductive_hours,
+    allDistracting_hours, uncategorized_hours,
+    business_hours, communicationAndScheduling_hours,
+    socialNetworking_hours, designAndComposition_hours,
+    entertainment_hours, news_hours, softwareDevelopment_hours,
+    referenceAndLearning_hours, shopping_hours,
+    utilities_hours, totalDuration_formatted,
+    veryProductiveDuration_formatted, productiveDuration_formatted,
+    neutralDuration_formatted, distractingDuration_formatted,
+    veryDistractingDuration_formatted, allProductiveDuration_formatted,
+    allDistractingDuration_formatted, uncategorizedDuration_formatted,
+    businessDuration_formatted, communicationAndSchedulingDuration_formatted,
+    socialNetworkingDuration_formatted, designAndCompositionDuration_formatted,
+    entertainmentDuration_formatted, newsDuration_formatted,
+    softwareDevelopmentDuration_formatted, referenceAndLearningDuration_formatted,
+    shoppingDuration_formatted, utilitiesDuration_formatted,
+    id, `year`, `month`, `day`
+    )
+    values (#{date,jdbcType=TIMESTAMP}, #{productivityPulse,jdbcType=DECIMAL},
+    #{veryproductivePercentage,jdbcType=DECIMAL},
+    #{productivePercentage,jdbcType=DECIMAL}, #{neutralPercentage,jdbcType=DECIMAL},
+    #{distractingPercentage,jdbcType=DECIMAL}, #{verydistractingPercentage,jdbcType=DECIMAL},
+    #{allproductivePercentage,jdbcType=DECIMAL}, #{alldistractingPercentage,jdbcType=DECIMAL},
+    #{uncategorizedPercentage,jdbcType=DECIMAL}, #{businessPercentage,jdbcType=DECIMAL},
+    #{communicationandschedulingPercentage,jdbcType=DECIMAL}, #{socialnetworkingPercentage,jdbcType=DECIMAL},
+    #{designandcompositionPercentage,jdbcType=DECIMAL}, #{entertainmentPercentage,jdbcType=DECIMAL},
+    #{newsPercentage,jdbcType=DECIMAL}, #{softwaredevelopmentPercentage,jdbcType=DECIMAL},
+    #{referenceandlearningPercentage,jdbcType=DECIMAL}, #{shoppingPercentage,jdbcType=DECIMAL},
+    #{utilitiesPercentage,jdbcType=DECIMAL}, #{totalHours,jdbcType=DECIMAL}, #{veryproductiveHours,jdbcType=DECIMAL},
+    #{productiveHours,jdbcType=DECIMAL}, #{neutralHours,jdbcType=DECIMAL}, #{distractingHours,jdbcType=DECIMAL},
+    #{verydistractingHours,jdbcType=DECIMAL}, #{allproductiveHours,jdbcType=DECIMAL},
+    #{alldistractingHours,jdbcType=DECIMAL}, #{uncategorizedHours,jdbcType=DECIMAL},
+    #{businessHours,jdbcType=DECIMAL}, #{communicationandschedulingHours,jdbcType=DECIMAL},
+    #{socialnetworkingHours,jdbcType=DECIMAL}, #{designandcompositionHours,jdbcType=DECIMAL},
+    #{entertainmentHours,jdbcType=DECIMAL}, #{newsHours,jdbcType=DECIMAL}, #{softwaredevelopmentHours,jdbcType=DECIMAL},
+    #{referenceandlearningHours,jdbcType=DECIMAL}, #{shoppingHours,jdbcType=DECIMAL},
+    #{utilitiesHours,jdbcType=DECIMAL}, #{totaldurationFormatted,jdbcType=VARCHAR},
+    #{veryproductivedurationFormatted,jdbcType=VARCHAR}, #{productivedurationFormatted,jdbcType=VARCHAR},
+    #{neutraldurationFormatted,jdbcType=VARCHAR}, #{distractingdurationFormatted,jdbcType=VARCHAR},
+    #{verydistractingdurationFormatted,jdbcType=VARCHAR}, #{allproductivedurationFormatted,jdbcType=VARCHAR},
+    #{alldistractingdurationFormatted,jdbcType=VARCHAR}, #{uncategorizeddurationFormatted,jdbcType=VARCHAR},
+    #{businessdurationFormatted,jdbcType=VARCHAR}, #{communicationandschedulingdurationFormatted,jdbcType=VARCHAR},
+    #{socialnetworkingdurationFormatted,jdbcType=VARCHAR}, #{designandcompositiondurationFormatted,jdbcType=VARCHAR},
+    #{entertainmentdurationFormatted,jdbcType=VARCHAR}, #{newsdurationFormatted,jdbcType=VARCHAR},
+    #{softwaredevelopmentdurationFormatted,jdbcType=VARCHAR}, #{referenceandlearningdurationFormatted,jdbcType=VARCHAR},
+    #{shoppingdurationFormatted,jdbcType=VARCHAR}, #{utilitiesdurationFormatted,jdbcType=VARCHAR},
+    #{id,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, #{day,jdbcType=INTEGER}
+    )
+  </insert>
+  <insert id="insertSelective" keyColumn="fid" keyProperty="fid"
+          parameterType="com.huifer.jenkinsspringboot.entity.db.TDailysummaryfeedrest" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_dailysummaryfeedrest
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="productivityPulse != null">
+        productivity_pulse,
+      </if>
+      <if test="veryproductivePercentage != null">
+        veryProductive_percentage,
+      </if>
+      <if test="productivePercentage != null">
+        productive_percentage,
+      </if>
+      <if test="neutralPercentage != null">
+        neutral_percentage,
+      </if>
+      <if test="distractingPercentage != null">
+        distracting_percentage,
+      </if>
+      <if test="verydistractingPercentage != null">
+        veryDistracting_percentage,
+      </if>
+      <if test="allproductivePercentage != null">
+        allProductive_percentage,
+      </if>
+      <if test="alldistractingPercentage != null">
+        allDistracting_percentage,
+      </if>
+      <if test="uncategorizedPercentage != null">
+        uncategorized_percentage,
+      </if>
+      <if test="businessPercentage != null">
+        business_percentage,
+      </if>
+      <if test="communicationandschedulingPercentage != null">
+        communicationAndScheduling_percentage,
+      </if>
+      <if test="socialnetworkingPercentage != null">
+        socialNetworking_percentage,
+      </if>
+      <if test="designandcompositionPercentage != null">
+        designAndComposition_percentage,
+      </if>
+      <if test="entertainmentPercentage != null">
+        entertainment_percentage,
+      </if>
+      <if test="newsPercentage != null">
+        news_percentage,
+      </if>
+      <if test="softwaredevelopmentPercentage != null">
+        softwareDevelopment_percentage,
+      </if>
+      <if test="referenceandlearningPercentage != null">
+        referenceAndLearning_percentage,
+      </if>
+      <if test="shoppingPercentage != null">
+        shopping_percentage,
+      </if>
+      <if test="utilitiesPercentage != null">
+        utilities_percentage,
+      </if>
+      <if test="totalHours != null">
+        total_hours,
+      </if>
+      <if test="veryproductiveHours != null">
+        veryProductive_hours,
+      </if>
+      <if test="productiveHours != null">
+        productive_hours,
+      </if>
+      <if test="neutralHours != null">
+        neutral_hours,
+      </if>
+      <if test="distractingHours != null">
+        distracting_hours,
+      </if>
+      <if test="verydistractingHours != null">
+        veryDistracting_hours,
+      </if>
+      <if test="allproductiveHours != null">
+        allProductive_hours,
+      </if>
+      <if test="alldistractingHours != null">
+        allDistracting_hours,
+      </if>
+      <if test="uncategorizedHours != null">
+        uncategorized_hours,
+      </if>
+      <if test="businessHours != null">
+        business_hours,
+      </if>
+      <if test="communicationandschedulingHours != null">
+        communicationAndScheduling_hours,
+      </if>
+      <if test="socialnetworkingHours != null">
+        socialNetworking_hours,
+      </if>
+      <if test="designandcompositionHours != null">
+        designAndComposition_hours,
+      </if>
+      <if test="entertainmentHours != null">
+        entertainment_hours,
+      </if>
+      <if test="newsHours != null">
+        news_hours,
+      </if>
+      <if test="softwaredevelopmentHours != null">
+        softwareDevelopment_hours,
+      </if>
+      <if test="referenceandlearningHours != null">
+        referenceAndLearning_hours,
+      </if>
+      <if test="shoppingHours != null">
+        shopping_hours,
+      </if>
+      <if test="utilitiesHours != null">
+        utilities_hours,
+      </if>
+      <if test="totaldurationFormatted != null">
+        totalDuration_formatted,
+      </if>
+      <if test="veryproductivedurationFormatted != null">
+        veryProductiveDuration_formatted,
+      </if>
+      <if test="productivedurationFormatted != null">
+        productiveDuration_formatted,
+      </if>
+      <if test="neutraldurationFormatted != null">
+        neutralDuration_formatted,
+      </if>
+      <if test="distractingdurationFormatted != null">
+        distractingDuration_formatted,
+      </if>
+      <if test="verydistractingdurationFormatted != null">
+        veryDistractingDuration_formatted,
+      </if>
+      <if test="allproductivedurationFormatted != null">
+        allProductiveDuration_formatted,
+      </if>
+      <if test="alldistractingdurationFormatted != null">
+        allDistractingDuration_formatted,
+      </if>
+      <if test="uncategorizeddurationFormatted != null">
+        uncategorizedDuration_formatted,
+      </if>
+      <if test="businessdurationFormatted != null">
+        businessDuration_formatted,
+      </if>
+      <if test="communicationandschedulingdurationFormatted != null">
+        communicationAndSchedulingDuration_formatted,
+      </if>
+      <if test="socialnetworkingdurationFormatted != null">
+        socialNetworkingDuration_formatted,
+      </if>
+      <if test="designandcompositiondurationFormatted != null">
+        designAndCompositionDuration_formatted,
+      </if>
+      <if test="entertainmentdurationFormatted != null">
+        entertainmentDuration_formatted,
+      </if>
+      <if test="newsdurationFormatted != null">
+        newsDuration_formatted,
+      </if>
+      <if test="softwaredevelopmentdurationFormatted != null">
+        softwareDevelopmentDuration_formatted,
+      </if>
+      <if test="referenceandlearningdurationFormatted != null">
+        referenceAndLearningDuration_formatted,
+      </if>
+      <if test="shoppingdurationFormatted != null">
+        shoppingDuration_formatted,
+      </if>
+      <if test="utilitiesdurationFormatted != null">
+        utilitiesDuration_formatted,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="year != null">
+        `year`,
+      </if>
+      <if test="month != null">
+        `month`,
+      </if>
+      <if test="day != null">
+        `day`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productivityPulse != null">
+        #{productivityPulse,jdbcType=DECIMAL},
+      </if>
+      <if test="veryproductivePercentage != null">
+        #{veryproductivePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="productivePercentage != null">
+        #{productivePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="neutralPercentage != null">
+        #{neutralPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="distractingPercentage != null">
+        #{distractingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="verydistractingPercentage != null">
+        #{verydistractingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="allproductivePercentage != null">
+        #{allproductivePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="alldistractingPercentage != null">
+        #{alldistractingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="uncategorizedPercentage != null">
+        #{uncategorizedPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="businessPercentage != null">
+        #{businessPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="communicationandschedulingPercentage != null">
+        #{communicationandschedulingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="socialnetworkingPercentage != null">
+        #{socialnetworkingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="designandcompositionPercentage != null">
+        #{designandcompositionPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="entertainmentPercentage != null">
+        #{entertainmentPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="newsPercentage != null">
+        #{newsPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="softwaredevelopmentPercentage != null">
+        #{softwaredevelopmentPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="referenceandlearningPercentage != null">
+        #{referenceandlearningPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="shoppingPercentage != null">
+        #{shoppingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="utilitiesPercentage != null">
+        #{utilitiesPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="totalHours != null">
+        #{totalHours,jdbcType=DECIMAL},
+      </if>
+      <if test="veryproductiveHours != null">
+        #{veryproductiveHours,jdbcType=DECIMAL},
+      </if>
+      <if test="productiveHours != null">
+        #{productiveHours,jdbcType=DECIMAL},
+      </if>
+      <if test="neutralHours != null">
+        #{neutralHours,jdbcType=DECIMAL},
+      </if>
+      <if test="distractingHours != null">
+        #{distractingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="verydistractingHours != null">
+        #{verydistractingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="allproductiveHours != null">
+        #{allproductiveHours,jdbcType=DECIMAL},
+      </if>
+      <if test="alldistractingHours != null">
+        #{alldistractingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="uncategorizedHours != null">
+        #{uncategorizedHours,jdbcType=DECIMAL},
+      </if>
+      <if test="businessHours != null">
+        #{businessHours,jdbcType=DECIMAL},
+      </if>
+      <if test="communicationandschedulingHours != null">
+        #{communicationandschedulingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="socialnetworkingHours != null">
+        #{socialnetworkingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="designandcompositionHours != null">
+        #{designandcompositionHours,jdbcType=DECIMAL},
+      </if>
+      <if test="entertainmentHours != null">
+        #{entertainmentHours,jdbcType=DECIMAL},
+      </if>
+      <if test="newsHours != null">
+        #{newsHours,jdbcType=DECIMAL},
+      </if>
+      <if test="softwaredevelopmentHours != null">
+        #{softwaredevelopmentHours,jdbcType=DECIMAL},
+      </if>
+      <if test="referenceandlearningHours != null">
+        #{referenceandlearningHours,jdbcType=DECIMAL},
+      </if>
+      <if test="shoppingHours != null">
+        #{shoppingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="utilitiesHours != null">
+        #{utilitiesHours,jdbcType=DECIMAL},
+      </if>
+      <if test="totaldurationFormatted != null">
+        #{totaldurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="veryproductivedurationFormatted != null">
+        #{veryproductivedurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="productivedurationFormatted != null">
+        #{productivedurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="neutraldurationFormatted != null">
+        #{neutraldurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="distractingdurationFormatted != null">
+        #{distractingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="verydistractingdurationFormatted != null">
+        #{verydistractingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="allproductivedurationFormatted != null">
+        #{allproductivedurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="alldistractingdurationFormatted != null">
+        #{alldistractingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="uncategorizeddurationFormatted != null">
+        #{uncategorizeddurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="businessdurationFormatted != null">
+        #{businessdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationandschedulingdurationFormatted != null">
+        #{communicationandschedulingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="socialnetworkingdurationFormatted != null">
+        #{socialnetworkingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="designandcompositiondurationFormatted != null">
+        #{designandcompositiondurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="entertainmentdurationFormatted != null">
+        #{entertainmentdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="newsdurationFormatted != null">
+        #{newsdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="softwaredevelopmentdurationFormatted != null">
+        #{softwaredevelopmentdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceandlearningdurationFormatted != null">
+        #{referenceandlearningdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingdurationFormatted != null">
+        #{shoppingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="utilitiesdurationFormatted != null">
+        #{utilitiesdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huifer.jenkinsspringboot.entity.db.TDailysummaryfeedrest">
+    <!--@mbg.generated-->
+    update t_dailysummaryfeedrest
+    <set>
+      <if test="date != null">
+        `date` = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productivityPulse != null">
+        productivity_pulse = #{productivityPulse,jdbcType=DECIMAL},
+      </if>
+      <if test="veryproductivePercentage != null">
+        veryProductive_percentage = #{veryproductivePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="productivePercentage != null">
+        productive_percentage = #{productivePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="neutralPercentage != null">
+        neutral_percentage = #{neutralPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="distractingPercentage != null">
+        distracting_percentage = #{distractingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="verydistractingPercentage != null">
+        veryDistracting_percentage = #{verydistractingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="allproductivePercentage != null">
+        allProductive_percentage = #{allproductivePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="alldistractingPercentage != null">
+        allDistracting_percentage = #{alldistractingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="uncategorizedPercentage != null">
+        uncategorized_percentage = #{uncategorizedPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="businessPercentage != null">
+        business_percentage = #{businessPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="communicationandschedulingPercentage != null">
+        communicationAndScheduling_percentage = #{communicationandschedulingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="socialnetworkingPercentage != null">
+        socialNetworking_percentage = #{socialnetworkingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="designandcompositionPercentage != null">
+        designAndComposition_percentage = #{designandcompositionPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="entertainmentPercentage != null">
+        entertainment_percentage = #{entertainmentPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="newsPercentage != null">
+        news_percentage = #{newsPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="softwaredevelopmentPercentage != null">
+        softwareDevelopment_percentage = #{softwaredevelopmentPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="referenceandlearningPercentage != null">
+        referenceAndLearning_percentage = #{referenceandlearningPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="shoppingPercentage != null">
+        shopping_percentage = #{shoppingPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="utilitiesPercentage != null">
+        utilities_percentage = #{utilitiesPercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="totalHours != null">
+        total_hours = #{totalHours,jdbcType=DECIMAL},
+      </if>
+      <if test="veryproductiveHours != null">
+        veryProductive_hours = #{veryproductiveHours,jdbcType=DECIMAL},
+      </if>
+      <if test="productiveHours != null">
+        productive_hours = #{productiveHours,jdbcType=DECIMAL},
+      </if>
+      <if test="neutralHours != null">
+        neutral_hours = #{neutralHours,jdbcType=DECIMAL},
+      </if>
+      <if test="distractingHours != null">
+        distracting_hours = #{distractingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="verydistractingHours != null">
+        veryDistracting_hours = #{verydistractingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="allproductiveHours != null">
+        allProductive_hours = #{allproductiveHours,jdbcType=DECIMAL},
+      </if>
+      <if test="alldistractingHours != null">
+        allDistracting_hours = #{alldistractingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="uncategorizedHours != null">
+        uncategorized_hours = #{uncategorizedHours,jdbcType=DECIMAL},
+      </if>
+      <if test="businessHours != null">
+        business_hours = #{businessHours,jdbcType=DECIMAL},
+      </if>
+      <if test="communicationandschedulingHours != null">
+        communicationAndScheduling_hours = #{communicationandschedulingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="socialnetworkingHours != null">
+        socialNetworking_hours = #{socialnetworkingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="designandcompositionHours != null">
+        designAndComposition_hours = #{designandcompositionHours,jdbcType=DECIMAL},
+      </if>
+      <if test="entertainmentHours != null">
+        entertainment_hours = #{entertainmentHours,jdbcType=DECIMAL},
+      </if>
+      <if test="newsHours != null">
+        news_hours = #{newsHours,jdbcType=DECIMAL},
+      </if>
+      <if test="softwaredevelopmentHours != null">
+        softwareDevelopment_hours = #{softwaredevelopmentHours,jdbcType=DECIMAL},
+      </if>
+      <if test="referenceandlearningHours != null">
+        referenceAndLearning_hours = #{referenceandlearningHours,jdbcType=DECIMAL},
+      </if>
+      <if test="shoppingHours != null">
+        shopping_hours = #{shoppingHours,jdbcType=DECIMAL},
+      </if>
+      <if test="utilitiesHours != null">
+        utilities_hours = #{utilitiesHours,jdbcType=DECIMAL},
+      </if>
+      <if test="totaldurationFormatted != null">
+        totalDuration_formatted = #{totaldurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="veryproductivedurationFormatted != null">
+        veryProductiveDuration_formatted = #{veryproductivedurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="productivedurationFormatted != null">
+        productiveDuration_formatted = #{productivedurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="neutraldurationFormatted != null">
+        neutralDuration_formatted = #{neutraldurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="distractingdurationFormatted != null">
+        distractingDuration_formatted = #{distractingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="verydistractingdurationFormatted != null">
+        veryDistractingDuration_formatted = #{verydistractingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="allproductivedurationFormatted != null">
+        allProductiveDuration_formatted = #{allproductivedurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="alldistractingdurationFormatted != null">
+        allDistractingDuration_formatted = #{alldistractingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="uncategorizeddurationFormatted != null">
+        uncategorizedDuration_formatted = #{uncategorizeddurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="businessdurationFormatted != null">
+        businessDuration_formatted = #{businessdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationandschedulingdurationFormatted != null">
+        communicationAndSchedulingDuration_formatted = #{communicationandschedulingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="socialnetworkingdurationFormatted != null">
+        socialNetworkingDuration_formatted = #{socialnetworkingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="designandcompositiondurationFormatted != null">
+        designAndCompositionDuration_formatted = #{designandcompositiondurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="entertainmentdurationFormatted != null">
+        entertainmentDuration_formatted = #{entertainmentdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="newsdurationFormatted != null">
+        newsDuration_formatted = #{newsdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="softwaredevelopmentdurationFormatted != null">
+        softwareDevelopmentDuration_formatted = #{softwaredevelopmentdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceandlearningdurationFormatted != null">
+        referenceAndLearningDuration_formatted = #{referenceandlearningdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingdurationFormatted != null">
+        shoppingDuration_formatted = #{shoppingdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="utilitiesdurationFormatted != null">
+        utilitiesDuration_formatted = #{utilitiesdurationFormatted,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        `year` = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        `month` = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="day != null">
+        `day` = #{day,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huifer.jenkinsspringboot.entity.db.TDailysummaryfeedrest">
+    <!--@mbg.generated-->
+    update t_dailysummaryfeedrest
+    set `date` = #{date,jdbcType=TIMESTAMP},
+    productivity_pulse = #{productivityPulse,jdbcType=DECIMAL},
+    veryProductive_percentage = #{veryproductivePercentage,jdbcType=DECIMAL},
+    productive_percentage = #{productivePercentage,jdbcType=DECIMAL},
+    neutral_percentage = #{neutralPercentage,jdbcType=DECIMAL},
+    distracting_percentage = #{distractingPercentage,jdbcType=DECIMAL},
+    veryDistracting_percentage = #{verydistractingPercentage,jdbcType=DECIMAL},
+    allProductive_percentage = #{allproductivePercentage,jdbcType=DECIMAL},
+    allDistracting_percentage = #{alldistractingPercentage,jdbcType=DECIMAL},
+    uncategorized_percentage = #{uncategorizedPercentage,jdbcType=DECIMAL},
+    business_percentage = #{businessPercentage,jdbcType=DECIMAL},
+    communicationAndScheduling_percentage = #{communicationandschedulingPercentage,jdbcType=DECIMAL},
+    socialNetworking_percentage = #{socialnetworkingPercentage,jdbcType=DECIMAL},
+    designAndComposition_percentage = #{designandcompositionPercentage,jdbcType=DECIMAL},
+    entertainment_percentage = #{entertainmentPercentage,jdbcType=DECIMAL},
+    news_percentage = #{newsPercentage,jdbcType=DECIMAL},
+    softwareDevelopment_percentage = #{softwaredevelopmentPercentage,jdbcType=DECIMAL},
+    referenceAndLearning_percentage = #{referenceandlearningPercentage,jdbcType=DECIMAL},
+    shopping_percentage = #{shoppingPercentage,jdbcType=DECIMAL},
+    utilities_percentage = #{utilitiesPercentage,jdbcType=DECIMAL},
+    total_hours = #{totalHours,jdbcType=DECIMAL},
+    veryProductive_hours = #{veryproductiveHours,jdbcType=DECIMAL},
+    productive_hours = #{productiveHours,jdbcType=DECIMAL},
+    neutral_hours = #{neutralHours,jdbcType=DECIMAL},
+    distracting_hours = #{distractingHours,jdbcType=DECIMAL},
+    veryDistracting_hours = #{verydistractingHours,jdbcType=DECIMAL},
+    allProductive_hours = #{allproductiveHours,jdbcType=DECIMAL},
+    allDistracting_hours = #{alldistractingHours,jdbcType=DECIMAL},
+    uncategorized_hours = #{uncategorizedHours,jdbcType=DECIMAL},
+    business_hours = #{businessHours,jdbcType=DECIMAL},
+    communicationAndScheduling_hours = #{communicationandschedulingHours,jdbcType=DECIMAL},
+    socialNetworking_hours = #{socialnetworkingHours,jdbcType=DECIMAL},
+    designAndComposition_hours = #{designandcompositionHours,jdbcType=DECIMAL},
+    entertainment_hours = #{entertainmentHours,jdbcType=DECIMAL},
+    news_hours = #{newsHours,jdbcType=DECIMAL},
+    softwareDevelopment_hours = #{softwaredevelopmentHours,jdbcType=DECIMAL},
+    referenceAndLearning_hours = #{referenceandlearningHours,jdbcType=DECIMAL},
+    shopping_hours = #{shoppingHours,jdbcType=DECIMAL},
+    utilities_hours = #{utilitiesHours,jdbcType=DECIMAL},
+    totalDuration_formatted = #{totaldurationFormatted,jdbcType=VARCHAR},
+    veryProductiveDuration_formatted = #{veryproductivedurationFormatted,jdbcType=VARCHAR},
+    productiveDuration_formatted = #{productivedurationFormatted,jdbcType=VARCHAR},
+    neutralDuration_formatted = #{neutraldurationFormatted,jdbcType=VARCHAR},
+    distractingDuration_formatted = #{distractingdurationFormatted,jdbcType=VARCHAR},
+    veryDistractingDuration_formatted = #{verydistractingdurationFormatted,jdbcType=VARCHAR},
+    allProductiveDuration_formatted = #{allproductivedurationFormatted,jdbcType=VARCHAR},
+    allDistractingDuration_formatted = #{alldistractingdurationFormatted,jdbcType=VARCHAR},
+    uncategorizedDuration_formatted = #{uncategorizeddurationFormatted,jdbcType=VARCHAR},
+    businessDuration_formatted = #{businessdurationFormatted,jdbcType=VARCHAR},
+    communicationAndSchedulingDuration_formatted = #{communicationandschedulingdurationFormatted,jdbcType=VARCHAR},
+    socialNetworkingDuration_formatted = #{socialnetworkingdurationFormatted,jdbcType=VARCHAR},
+    designAndCompositionDuration_formatted = #{designandcompositiondurationFormatted,jdbcType=VARCHAR},
+    entertainmentDuration_formatted = #{entertainmentdurationFormatted,jdbcType=VARCHAR},
+    newsDuration_formatted = #{newsdurationFormatted,jdbcType=VARCHAR},
+    softwareDevelopmentDuration_formatted = #{softwaredevelopmentdurationFormatted,jdbcType=VARCHAR},
+    referenceAndLearningDuration_formatted = #{referenceandlearningdurationFormatted,jdbcType=VARCHAR},
+    shoppingDuration_formatted = #{shoppingdurationFormatted,jdbcType=VARCHAR},
+    utilitiesDuration_formatted = #{utilitiesdurationFormatted,jdbcType=VARCHAR},
+    id = #{id,jdbcType=INTEGER},
+    `year` = #{year,jdbcType=INTEGER},
+    `month` = #{month,jdbcType=INTEGER},
+    `day` = #{day,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <select id="findByYearModDay" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    t_dailysummaryfeedrest where day=#{day} and year =#{year} and month=#{month} ;
+
+  </select>
+</mapper>
