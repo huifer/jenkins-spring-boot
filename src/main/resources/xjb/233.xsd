@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.topografix.com/GPX/1/0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ele" type="xs:string"/>
+  <xs:element name="time" type="xs:string"/>
+  <xs:element name="trkpt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns:ele" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+        <xs:element ref="ns:time" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="lat" use="optional"/>
+      <xs:attribute type="xs:string" name="lon" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="行者骑行软件"/>
+        <xs:enumeration value="2019-10-13 上午 运动"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="trkseg">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns:trkpt" maxOccurs="unbounded" minOccurs="0" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="desc" type="xs:string"/>
+  <xs:element name="keywords" type="xs:string"/>
+  <xs:element name="trk">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns:name" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+        <xs:element ref="ns:trkseg" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gpx">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns:name" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+        <xs:element ref="ns:desc" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+        <xs:element ref="ns:time" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+        <xs:element ref="ns:keywords" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+        <xs:element ref="ns:trk" xmlns:ns="http://www.topografix.com/GPX/1/0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="version"/>
+      <xs:attribute type="xs:string" name="creator"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

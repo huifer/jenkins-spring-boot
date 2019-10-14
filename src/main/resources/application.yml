@@ -96,3 +96,25 @@ rescuetime:
   highlight_info_url: ${rescuetime.base_url}/highlights_post
 
 test_api: xxxxx
+
+
+### 森柏rest template 请求列表
+senbo.rest:
+  # 地址+端口
+  host_port: http://localhost:8089
+  ticket:
+    base_url: ${senbo.rest.host_port}/mobile/api/ticket/
+    #门票列表
+    list: ${senbo.rest.ticket.base_url}/ticketManage
+    # 门票详情
+    details: ${senbo.rest.ticket.base_url}/ticketDetails
+    # 获取门票价格信息
+    price: ${senbo.rest.ticket.base_url}/ticketPrice
+    # 查询优惠详情
+    activeiet: ${senbo.rest.ticket.base_url}/selectActiviet
+    # 预定须知
+    notice: ${senbo.rest.ticket.base_url}/notice
+    #预定页优惠信息
+    activity_quota: ${senbo.rest.ticket.base_url}/activityQuota
+    # 预定列表
+    activity_list: ${senbo.rest.ticket.base_url}/activityList

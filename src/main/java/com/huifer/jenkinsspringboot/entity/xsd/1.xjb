@@ -1,0 +1,17 @@
+<jxb:bindings version="1.0"
+              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!--
+      Change since version 2.0 of the j-m-p:
+
+      Note that the schemaLocation path must point to the XSD file
+      relative to *this* file, rather than the basedir.
+  -->
+  <jxb:bindings schemaLocation="../1.xsd" node="//xsd:schema">
+    <jxb:schemaBindings>
+      <jxb:package name="com.huifer.jenkinsspringboot.entity.xsd"/>
+    </jxb:schemaBindings>
+  </jxb:bindings>
+
+</jxb:bindings>
