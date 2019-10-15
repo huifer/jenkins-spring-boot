@@ -32,7 +32,7 @@ public class ThreadDemo {
                 TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), namedThreadFactory);
 
         List<Future<Integer>> futures = new ArrayList<>();
-        for (int i = 3; i <= 414; i++) {
+        for (int i = 2; i <= 414; i++) {
 
             //申请单个线程执行类
             WorkThread call = new WorkThread(i);
