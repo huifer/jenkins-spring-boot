@@ -22,8 +22,6 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,6 +75,12 @@ public class XzSpider {
             spiderHistory(uid);
         }
 
+    }
+
+    public String uidHistory(String url) {
+        Integer uid = url2userId(url);
+        spiderHistory(uid);
+        return uid + "完成";
     }
 
     private Integer url2userId(String url) {
