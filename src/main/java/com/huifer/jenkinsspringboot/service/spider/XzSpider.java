@@ -22,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -251,7 +253,8 @@ public class XzSpider {
      *
      * @param cityId
      */
-    private void getCityUsers(int cityId) {
+    public String getCityUsers(int cityId) {
+
         log.info("当前cityId= {}", cityId);
         String url = "http://www.imxingzhe.com/city/%d/?page=%d";
         GetTotal getTotal = new GetTotal(String.format(url, cityId, 1)).invoke();
@@ -284,6 +287,7 @@ public class XzSpider {
 
         }
 //        log.info("共有={}人", userPros.size());
+        return "cityid=" + cityId + "完成";
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.huifer.jenkinsspringboot.controller;
 
+import com.huifer.jenkinsspringboot.service.ThreadDemo;
 import com.huifer.jenkinsspringboot.service.spider.XzSpider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +26,14 @@ public class RunController {
     public String spc() {
         xzSpider.spiderUserId();
         return "okok";
+    }
+
+    @Autowired
+    ThreadDemo threadDemo;
+
+    @GetMapping("t1")
+    public String thread1User() {
+        threadDemo.run();
+        return "thread1 ok";
     }
 }
