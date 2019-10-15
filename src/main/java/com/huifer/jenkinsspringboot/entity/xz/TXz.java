@@ -23,4 +23,7 @@ public class TXz {
 
     @TableField("page")
     private Integer page;
+
+    @TableField("user_id")
+    private Integer userId;
 }

@@ -5,6 +5,7 @@ import com.huifer.jenkinsspringboot.entity.xz.TStinfo;
 import com.huifer.jenkinsspringboot.entity.xz.TWoinfo;
 import com.huifer.jenkinsspringboot.entity.xz.TXz;
 import com.huifer.jenkinsspringboot.entity.xz.UserMonthInfo;
+import com.huifer.jenkinsspringboot.mapper.TXzMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -36,6 +37,21 @@ public class XzSpider {
     @Autowired
     XzService xzService;
 
+    @Autowired
+    TXzMapper tXzMapper;
+
+    @Autowired
+    WoinfoService woinfoService;
+    @Autowired
+    StinfoService stinfoService;
+
+    /**
+     * 正则
+     *
+     * @param str
+     * @param regex
+     * @return
+     */
     private static String regex(String str, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher match = pattern.matcher(str);
@@ -49,11 +65,43 @@ public class XzSpider {
         return "";
     }
 
-    @Autowired
-    WoinfoService woinfoService;
-    @Autowired
-    StinfoService stinfoService;
+    public void spiderUserId() {
+        // 数据库t_xz url
 
+        List<TXz> all = tXzMapper.findAll();
+        for (TXz tXz : all) {
+            String url = tXz.getUrl();
+            Integer uid = url2userId(url);
+            spiderHistory(uid);
+        }
+
+    }
+
+    private Integer url2userId(String url) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571099537,1571101155,1571101615,1571104827; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571105168");
+        ResponseEntity<String> exchange = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new HttpEntity<String>(headers),
+
+                String.class
+        );
+        String body = exchange.getBody();
+        String regex = "uid.*\\d+.*";
+        String regex1 = regex(body, regex);
+        String uidStr = regex(regex1, "\\d+");
+        Integer uid = Integer.valueOf(uidStr);
+        log.info("更新数据,url={},uid={}", url, uid);
+        tXzMapper.updateByUrl(url, uid);
+        return uid;
+    }
+
+    /**
+     * 路线数据
+     *
+     * @throws Exception
+     */
     public void line() throws Exception {
         String Cookie = "td_cookie=2441531771; td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1570757134,1571020126,1571020162; rd=X4DR; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571029514";
         String url = "http://www.imxingzhe.com/xing/72076175/gpx/";
@@ -81,15 +129,13 @@ public class XzSpider {
     /**
      * 获取行车历史
      */
-    public void spider() {
-        int userId = 3818020;
+    public void spiderHistory(int userId) {
         int year = 2019;
         int month = 12;
 
         for (int y = 2010; y <= year; y++) {
             for (int m = 1; m <= month; m++) {
                 getUserMonth(userId, y, m);
-
             }
         }
 
@@ -123,6 +169,14 @@ public class XzSpider {
         insertWo(woInfo, year, month);
     }
 
+    /**
+     * 插入st数据
+     *
+     * @param st
+     * @param year
+     * @param month
+     * @param userId
+     */
     private void insertSt(UserMonthInfo.DataBean.StInfoBean st, int year, int month, int userId) {
         TStinfo tStinfo = new TStinfo();
         tStinfo.setYear(year);
@@ -137,6 +191,13 @@ public class XzSpider {
         stinfoService.insert(tStinfo);
     }
 
+    /**
+     * 插入wo数据
+     *
+     * @param wo
+     * @param year
+     * @param month
+     */
     private void insertWo(List<UserMonthInfo.DataBean.WoInfoBean> wo, int year, int month) {
         List<TWoinfo> ls = new ArrayList<>();
         for (UserMonthInfo.DataBean.WoInfoBean woInfoBean : wo) {
@@ -176,12 +237,20 @@ public class XzSpider {
         woinfoService.inserts(ls);
     }
 
+    /**
+     * 抓取排行榜数据
+     */
     public void spiderTop() {
         for (int i = 1; i <= 414; i++) {
             getCityUsers(i);
         }
     }
 
+    /**
+     * 根据城市id 抓取排行榜数据
+     *
+     * @param cityId
+     */
     private void getCityUsers(int cityId) {
         log.info("当前cityId= {}", cityId);
         String url = "http://www.imxingzhe.com/city/%d/?page=%d";
@@ -216,6 +285,10 @@ public class XzSpider {
         }
 //        log.info("共有={}人", userPros.size());
     }
+
+    /**
+     * 城市数据类
+     */
     private class GetTotal {
         private String url;
         private String body;

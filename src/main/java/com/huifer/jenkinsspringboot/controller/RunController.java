@@ -20,4 +20,10 @@ public class RunController {
         xzSpider.spiderTop();
         return "ok";
     }
+
+    @GetMapping("/xzx")
+    public String spc() {
+        xzSpider.spiderUserId();
+        return "okok";
+    }
 }

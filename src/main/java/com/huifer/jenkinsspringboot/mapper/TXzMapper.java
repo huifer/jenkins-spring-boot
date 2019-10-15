@@ -3,6 +3,9 @@ package com.huifer.jenkinsspringboot.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.huifer.jenkinsspringboot.entity.xz.TXz;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface TXzMapper extends BaseMapper<TXz> {
@@ -17,4 +20,8 @@ public interface TXzMapper extends BaseMapper<TXz> {
     int updateByPrimaryKeySelective(TXz record);
 
     int updateByPrimaryKey(TXz record);
+
+    int updateByUrl(@Param("url") String url, @Param("userId") int userId);
+
+    List<TXz> findAll();
 }

@@ -13,6 +13,6 @@ public class XzSpiderTest {
     private XzSpider xzSpider;
     @Test
     public void spider() throws Exception {
-        xzSpider.spider();
+        xzSpider.spiderUserId();
     }
 }
