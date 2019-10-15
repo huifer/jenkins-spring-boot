@@ -114,47 +114,48 @@
       </plugin>
 
 
-      <plugin>
-        <groupId>org.jvnet.jaxb2.maven2</groupId>
-        <artifactId>maven-jaxb2-plugin</artifactId>
-        <configuration>
-          <schemaDirectory>src/main/resources/xjb</schemaDirectory>
-          <!--          <generateDirectory>src/main/java</generateDirectory>-->
-          <noFileHeader>true</noFileHeader>
-          <episode>false</episode>
-          <locale>en</locale>
-        </configuration>
+<!--      <plugin>-->
+<!--        <groupId>org.jvnet.jaxb2.maven2</groupId>-->
+<!--        <artifactId>maven-jaxb2-plugin</artifactId>-->
+<!--     <version>0.15.0</version>-->
+<!--        <configuration>-->
+<!--          <schemaDirectory>src/main/resources/xjb</schemaDirectory>-->
+<!--          &lt;!&ndash;          <generateDirectory>src/main/java</generateDirectory>&ndash;&gt;-->
+<!--          <noFileHeader>true</noFileHeader>-->
+<!--          <episode>false</episode>-->
+<!--          <locale>en</locale>-->
+<!--        </configuration>-->
 
 
-        <executions>
-          <execution>
-            <id>generate</id>
-            <goals>
-              <goal>generate</goal>
-            </goals>
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>generate</id>-->
+<!--            <goals>-->
+<!--              <goal>generate</goal>-->
+<!--            </goals>-->
 
 
-            <configuration>
-              <strict>false</strict>
+<!--            <configuration>-->
+<!--              <strict>false</strict>-->
 
-              <schemaIncludes/>
-              <schemas>
-                <schema>
-                  <url>http://www.topografix.com/GPX/1/0/gpx.xsd</url>
-                </schema>
-                <schema>
-                  <fileset>
-                    <includes>
-                      <include>233.xsd</include>
-                    </includes>
-                  </fileset>
-                </schema>
-              </schemas>
-            </configuration>
-          </execution>
-        </executions>
+<!--              <schemaIncludes/>-->
+<!--              <schemas>-->
+<!--                <schema>-->
+<!--                  <url>http://www.topografix.com/GPX/1/0/gpx.xsd</url>-->
+<!--                </schema>-->
+<!--                <schema>-->
+<!--                  <fileset>-->
+<!--                    <includes>-->
+<!--                      <include>233.xsd</include>-->
+<!--                    </includes>-->
+<!--                  </fileset>-->
+<!--                </schema>-->
+<!--              </schemas>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
 
-      </plugin>
+<!--      </plugin>-->
 
     </plugins>
   </build>
