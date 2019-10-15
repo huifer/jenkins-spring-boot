@@ -28,7 +28,7 @@ public class ThreadDemo {
         //创建线程名
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("thread-call-runner-%d").build();
         //创建线程池
-        ExecutorService exc = new ThreadPoolExecutor(threadSize, threadSize, 0L,
+        ExecutorService exc = new ThreadPoolExecutor(10, 10, 0L,
                 TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), namedThreadFactory);
 
         List<Future<Integer>> futures = new ArrayList<>();
@@ -54,7 +54,7 @@ public class ThreadDemo {
         int threadSize = Runtime.getRuntime().availableProcessors() + 1;
 
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("thread-call-runner-%d").build();
-        ExecutorService exc = new ThreadPoolExecutor(threadSize, threadSize, 0L,
+        ExecutorService exc = new ThreadPoolExecutor(10, 10, 0L,
                 TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), namedThreadFactory);
         List<TXz> all = tXzMapper.findAll();
 
