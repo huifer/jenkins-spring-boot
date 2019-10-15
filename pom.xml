@@ -85,6 +85,10 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
     <dependency>
       <groupId>dom4j</groupId>
@@ -103,6 +107,19 @@
       <artifactId>jsoup</artifactId>
       <version>1.12.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-spatial -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-spatial</artifactId>
+      <version>5.4.4.Final</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.wololo/jts2geojson -->
+    <dependency>
+      <groupId>org.wololo</groupId>
+      <artifactId>jts2geojson</artifactId>
+      <version>0.13.0</version>
+    </dependency>
+
 
   </dependencies>
 
