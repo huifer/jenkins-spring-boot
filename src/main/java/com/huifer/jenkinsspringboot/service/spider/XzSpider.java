@@ -97,21 +97,24 @@ public class XzSpider {
     private void getCityUsers(int cityId) {
         log.info("当前cityId= {}", cityId);
         String url = "http://www.imxingzhe.com/city/%d/?page=%d";
-        GetTotal getTotal = new GetTotal(String.format(url, 99, 1)).invoke();
+        GetTotal getTotal = new GetTotal(String.format(url, cityId, 1)).invoke();
 
         String total = getTotal.getTotal();
 
         int totalInt = Integer.valueOf(total);
         log.info("cityId={},共有={}页", cityId, totalInt);
-        List<TXz> userPros = new ArrayList<>();
 
         for (int i = 1; i <= totalInt; i++) {
             String body1 = new GetTotal(String.format(url, cityId, i)).invoke().getBody();
             Document doc = Jsoup.parse(body1);
             Elements rows = doc.select("a[class=user-name]");
+            List<TXz> userPros = new ArrayList<>();
             for (Element e : rows) {
                 String name = e.text();
                 String userUrl = BASE_XZ_URL + e.attr("href");
+                if (!userPros.isEmpty()) {
+                    userPros.clear();
+                }
                 TXz userPro = new TXz();
                 userPro.setCityId(cityId);
                 userPro.setName(name);
@@ -119,9 +122,9 @@ public class XzSpider {
                 userPros.add(userPro);
             }
             log.info("city_id={},第{}页完成,总共={}", cityId, i, totalInt);
+            xzService.inserts(userPros);
         }
-        log.info("共有={}人", userPros.size());
-        xzService.inserts(userPros);
+//        log.info("共有={}人", userPros.size());
     }
 
     private class GetTotal {
@@ -142,10 +145,14 @@ public class XzSpider {
         }
 
         public GetTotal invoke() {
+            HttpHeaders headers = new HttpHeaders();
+
+            headers.add("Cookie", "td_cookie=2522742900; td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571020162,1571099537,1571101155,1571101615; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571101783");
             ResponseEntity<String> exchange = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
-                    HttpEntity.EMPTY,
+//                    HttpEntity.EMPTY,
+                    new HttpEntity<String>(headers),
                     String.class
             );
             body = exchange.getBody();
