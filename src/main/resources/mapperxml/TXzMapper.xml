@@ -24,20 +24,17 @@
     delete from t_xz
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.huifer.jenkinsspringboot.entity.xz.TXz">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huifer.jenkinsspringboot.entity.xz.TXz" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into t_xz (id, city_id, `name`, 
-      url)
-    values (#{id,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR})
+    insert into t_xz (city_id, `name`, url
+      )
+    values (#{cityId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.huifer.jenkinsspringboot.entity.xz.TXz">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huifer.jenkinsspringboot.entity.xz.TXz" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into t_xz
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="cityId != null">
         city_id,
       </if>
@@ -49,9 +46,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="cityId != null">
         #{cityId,jdbcType=INTEGER},
       </if>
