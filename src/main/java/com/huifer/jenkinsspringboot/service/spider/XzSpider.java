@@ -1,9 +1,13 @@
 package com.huifer.jenkinsspringboot.service.spider;
 
 import com.alibaba.fastjson.JSONObject;
+import com.huifer.jenkinsspringboot.entity.xz.TXz;
 import com.huifer.jenkinsspringboot.entity.xz.UserInfo;
-import org.dom4j.Attribute;
-import org.dom4j.Element;
+import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,31 +16,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Date: 2019-10-14
  */
+@Slf4j
 @Service
 public class XzSpider {
     @Autowired
     private RestTemplate restTemplate;
+    public static final String BASE_XZ_URL = "http://www.imxingzhe.com/";
+    @Autowired
+    XzService xzService;
 
-    public void spider() {
-        String url = "http://www.imxingzhe.com/api/v4/user_month_info?user_id=792998&year=2019&month=9";
-        ResponseEntity<String> exchange = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                HttpEntity.EMPTY,
-                String.class
-        );
-        String body = exchange.getBody();
-        JSONObject object = JSONObject.parseObject(body);
-        UserInfo userInfo = object.toJavaObject(UserInfo.class);
-        System.out.println();
+    private static String regex(String str, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher match = pattern.matcher(str);
+
+        while (match.find()) {
+            if (!"".equals(match.group())) {
+                String group = match.group();
+                return group;
+            }
+        }
+        return "";
     }
 
     public void line() throws Exception {
@@ -63,31 +70,89 @@ public class XzSpider {
 
     }
 
-    public <T> T xmlToBean(String xmlString, Class<T> tClass) throws Exception {
-        JAXBContext context = JAXBContext.newInstance(tClass);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        return (T) unmarshaller.unmarshal(new StringReader(xmlString));
-
+    /**
+     * 获取行车历史
+     */
+    public void spider() {
+        String url = "http://www.imxingzhe.com/api/v4/user_month_info?user_id=792998&year=2019&month=9";
+        ResponseEntity<String> exchange = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                HttpEntity.EMPTY,
+                String.class
+        );
+        String body = exchange.getBody();
+        JSONObject object = JSONObject.parseObject(body);
+        UserInfo userInfo = object.toJavaObject(UserInfo.class);
+        System.out.println();
     }
 
-    public void getNodes(Element node) {
-        System.out.println("--------------------");
 
-        //当前节点的名称、文本内容和属性
-        System.out.println("当前节点名称：" + node.getName());//当前节点名称
-        System.out.println("当前节点的内容：" + node.getTextTrim());//当前节点名称
-        List<Attribute> listAttr = node.attributes();//当前节点的所有属性的list
-        for (Attribute attr : listAttr) {//遍历当前节点的所有属性
-            String name = attr.getName();//属性名称
-            String value = attr.getValue();//属性的值
-            System.out.println("属性名称：" + name + "属性值：" + value);
-        }
-
-        //递归遍历当前节点所有的子节点
-        List<Element> listElement = node.elements();//所有一级子节点的list
-        for (Element e : listElement) {//遍历所有一级子节点
-            this.getNodes(e);//递归
+    public void spiderTop() {
+        for (int i = 1; i <= 414; i++) {
+            getCityUsers(i);
         }
     }
 
+    private void getCityUsers(int cityId) {
+        log.info("当前cityId= {}", cityId);
+        String url = "http://www.imxingzhe.com/city/%d/?page=%d";
+        GetTotal getTotal = new GetTotal(String.format(url, 99, 1)).invoke();
+
+        String total = getTotal.getTotal();
+
+        int totalInt = Integer.valueOf(total);
+        log.info("cityId={},共有={}页", cityId, totalInt);
+        List<TXz> userPros = new ArrayList<>();
+
+        for (int i = 1; i <= totalInt; i++) {
+            String body1 = new GetTotal(String.format(url, cityId, i)).invoke().getBody();
+            Document doc = Jsoup.parse(body1);
+            Elements rows = doc.select("a[class=user-name]");
+            for (Element e : rows) {
+                String name = e.text();
+                String userUrl = BASE_XZ_URL + e.attr("href");
+                TXz userPro = new TXz();
+                userPro.setCityId(cityId);
+                userPro.setName(name);
+                userPro.setUrl(userUrl);
+                userPros.add(userPro);
+            }
+            log.info("city_id={},第{}页完成,总共={}", cityId, i, totalInt);
+        }
+        log.info("共有={}人", userPros.size());
+        xzService.inserts(userPros);
+    }
+
+    private class GetTotal {
+        private String url;
+        private String body;
+        private String total;
+
+        public GetTotal(String url) {
+            this.url = url;
+        }
+
+        public String getBody() {
+            return body;
+        }
+
+        public String getTotal() {
+            return total;
+        }
+
+        public GetTotal invoke() {
+            ResponseEntity<String> exchange = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    HttpEntity.EMPTY,
+                    String.class
+            );
+            body = exchange.getBody();
+            String regex = "\\d+.*//总页码";
+            String regex1 = regex(body, regex);
+            total = regex(regex1, "\\d+");
+            return this;
+        }
+    }
 }
