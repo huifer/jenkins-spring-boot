@@ -113,4 +113,7 @@
 <!--    where id <![CDATA[ <= ]]> 100-->
 
   </select>
+  <select id="findCityId" resultType="java.lang.Integer">
+    SELECT DISTINCT(city_id) FROM `t_xz`
+  </select>
 </mapper>

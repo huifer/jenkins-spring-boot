@@ -23,6 +23,10 @@ public class ThreadDemo {
     @Autowired
     private XzSpider xzSpider;
 
+    public static void main(String[] args) {
+
+    }
+
     public void run() throws JSONException, IOException, InterruptedException, ExecutionException {
         int threadSize = Runtime.getRuntime().availableProcessors() + 1;
         //创建线程名
@@ -32,7 +36,15 @@ public class ThreadDemo {
                 TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), namedThreadFactory);
 
         List<Future<Integer>> futures = new ArrayList<>();
+
+
+        List<Integer> ids = tXzMapper.findCityId();
+        List<Integer> all = new ArrayList<>();
         for (int i = 2; i <= 414; i++) {
+            ids.add(i);
+        }
+        all.removeAll(ids);
+        for (int i : all) {
 
             //申请单个线程执行类
             WorkThread call = new WorkThread(i);

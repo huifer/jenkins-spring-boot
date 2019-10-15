@@ -24,4 +24,6 @@ public interface TXzMapper extends BaseMapper<TXz> {
     int updateByUrl(@Param("url") String url, @Param("userId") int userId);
 
     List<TXz> findAll();
+
+    List<Integer> findCityId();
 }

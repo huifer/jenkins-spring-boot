@@ -317,7 +317,7 @@ public class XzSpider {
         public GetTotal invoke() {
             HttpHeaders headers = new HttpHeaders();
 
-            headers.add("Cookie", "td_cookie=2522742900; td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571020162,1571099537,1571101155,1571101615; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571101783");
+            headers.add("Cookie", "sessionid=dpy9lnbrefdkfw21rjs7vzux87yrbsmk; csrftoken=1EWwgwGQG6GwpkU8QsbZh0m2E2v7PAE6; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1570963443,1571048548,1571056998,1571138433; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571138464");
             ResponseEntity<String> exchange = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
