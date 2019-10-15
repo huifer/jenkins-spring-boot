@@ -41,7 +41,7 @@ public class ThreadDemo {
         List<Integer> ids = tXzMapper.findCityId();
         List<Integer> all = new ArrayList<>();
         for (int i = 2; i <= 414; i++) {
-            ids.add(i);
+            all.add(i);
         }
         all.removeAll(ids);
         for (int i : all) {
