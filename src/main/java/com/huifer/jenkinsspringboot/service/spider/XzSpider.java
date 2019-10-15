@@ -112,21 +112,22 @@ public class XzSpider {
             for (Element e : rows) {
                 String name = e.text();
                 String userUrl = BASE_XZ_URL + e.attr("href");
-                if (!userPros.isEmpty()) {
-                    userPros.clear();
-                }
                 TXz userPro = new TXz();
                 userPro.setCityId(cityId);
                 userPro.setName(name);
                 userPro.setUrl(userUrl);
+                userPro.setPage(i);
                 userPros.add(userPro);
+
+
             }
-            log.info("city_id={},第{}页完成,总共={}", cityId, i, totalInt);
             xzService.inserts(userPros);
+            userPros.clear();
+            log.info("city_id={},第{}页完成,总共={}", cityId, i, totalInt);
+
         }
 //        log.info("共有={}人", userPros.size());
     }
-
     private class GetTotal {
         private String url;
         private String body;
