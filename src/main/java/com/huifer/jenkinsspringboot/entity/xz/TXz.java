@@ -20,4 +20,7 @@ public class TXz {
 
     @TableField("url")
     private String url;
+
+    @TableField("page")
+    private Integer page;
 }
