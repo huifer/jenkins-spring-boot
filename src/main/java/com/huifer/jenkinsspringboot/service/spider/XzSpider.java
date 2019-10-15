@@ -1,8 +1,10 @@
 package com.huifer.jenkinsspringboot.service.spider;
 
 import com.alibaba.fastjson.JSONObject;
+import com.huifer.jenkinsspringboot.entity.xz.TStinfo;
+import com.huifer.jenkinsspringboot.entity.xz.TWoinfo;
 import com.huifer.jenkinsspringboot.entity.xz.TXz;
-import com.huifer.jenkinsspringboot.entity.xz.UserInfo;
+import com.huifer.jenkinsspringboot.entity.xz.UserMonthInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -46,6 +49,11 @@ public class XzSpider {
         return "";
     }
 
+    @Autowired
+    WoinfoService woinfoService;
+    @Autowired
+    StinfoService stinfoService;
+
     public void line() throws Exception {
         String Cookie = "td_cookie=2441531771; td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1570757134,1571020126,1571020162; rd=X4DR; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571029514";
         String url = "http://www.imxingzhe.com/xing/72076175/gpx/";
@@ -56,7 +64,7 @@ public class XzSpider {
         headers.add("Accept-Language", "zh-CN,zh;q=0.9");
         headers.add("Cache-Control", "max-age=0");
         headers.add("Connection", "keep-alive");
-        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1570757134,1571020126,1571020162; rd=X4DR; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571029514");
+        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571099537,1571101155,1571101615,1571104827; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571105168");
         headers.add("Host", "www.imxingzhe.com");
         headers.add("Upgrade-Insecure-Requests", "1");
         headers.add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36");
@@ -74,19 +82,99 @@ public class XzSpider {
      * 获取行车历史
      */
     public void spider() {
-        String url = "http://www.imxingzhe.com/api/v4/user_month_info?user_id=792998&year=2019&month=9";
+        int userId = 3818020;
+        int year = 2019;
+        int month = 12;
+
+        for (int y = 2010; y <= year; y++) {
+            for (int m = 1; m <= month; m++) {
+                getUserMonth(userId, y, m);
+
+            }
+        }
+
+    }
+
+    /**
+     * 获取用户骑行基本数据
+     * @param userId
+     * @param year
+     * @param month
+     */
+    private void getUserMonth(int userId, int year, int month) {
+        log.info("开始获取用户年月数据,user_id={},year={},month={}", userId, year, month);
+        String url = "http://www.imxingzhe.com/api/v4/user_month_info?user_id=%d&year=%d&month=%d";
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571099537,1571101155,1571101615,1571104827; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571105168");
         ResponseEntity<String> exchange = restTemplate.exchange(
-                url,
+                String.format(url, userId, year, month),
                 HttpMethod.GET,
-                HttpEntity.EMPTY,
+                new HttpEntity<String>(headers),
+
                 String.class
         );
         String body = exchange.getBody();
         JSONObject object = JSONObject.parseObject(body);
-        UserInfo userInfo = object.toJavaObject(UserInfo.class);
-        System.out.println();
+        UserMonthInfo userMonthInfo = object.toJavaObject(UserMonthInfo.class);
+
+        UserMonthInfo.DataBean.StInfoBean stInfo = userMonthInfo.getData().getStInfo();
+        List<UserMonthInfo.DataBean.WoInfoBean> woInfo = userMonthInfo.getData().getWoInfo();
+        insertSt(stInfo, year, month, userId);
+        insertWo(woInfo, year, month);
     }
 
+    private void insertSt(UserMonthInfo.DataBean.StInfoBean st, int year, int month, int userId) {
+        TStinfo tStinfo = new TStinfo();
+        tStinfo.setYear(year);
+        tStinfo.setMonth(month);
+
+        tStinfo.setSumDuration(st.getSumDuration());
+        tStinfo.setSumDistance(st.getSumDistance());
+        tStinfo.setSumElevationGain(st.getSumElevationGain());
+        tStinfo.setCountDistance(st.getCountDistance());
+        tStinfo.setSumCredits(st.getSumCredits());
+        tStinfo.setUserId(userId);
+        stinfoService.insert(tStinfo);
+    }
+
+    private void insertWo(List<UserMonthInfo.DataBean.WoInfoBean> wo, int year, int month) {
+        List<TWoinfo> ls = new ArrayList<>();
+        for (UserMonthInfo.DataBean.WoInfoBean woInfoBean : wo) {
+            TWoinfo tWoinfo = new TWoinfo();
+            tWoinfo.setYear(year);
+            tWoinfo.setMonth(month);
+            tWoinfo.setHeartSource(woInfoBean.getHeartSource());
+            tWoinfo.setLikeCount(woInfoBean.getLikeCount());
+            tWoinfo.setDuration(woInfoBean.getDuration());
+            tWoinfo.setSport(woInfoBean.getSport());
+            tWoinfo.setId(woInfoBean.getId());
+            tWoinfo.setUploadTime(woInfoBean.getUploadTime());
+            tWoinfo.setUserId(woInfoBean.getUserId());
+            tWoinfo.setUuid(woInfoBean.getUuid());
+            tWoinfo.setTitle(woInfoBean.getTitle());
+            tWoinfo.setCadenceSource(woInfoBean.getCadenceSource());
+            tWoinfo.setIsValid(woInfoBean.getIsValid());
+            tWoinfo.setCommentCount(woInfoBean.getCommentCount());
+            tWoinfo.setElevationLoss(woInfoBean.getElevationLoss());
+            tWoinfo.setHidden(woInfoBean.getHidden() == Boolean.TRUE ? BigDecimal.ONE : BigDecimal.ZERO);
+            tWoinfo.setDesc(woInfoBean.getDesc());
+            tWoinfo.setThreedWorkout(woInfoBean.getThreedWorkout());
+            tWoinfo.setMapId(woInfoBean.getMapId());
+            tWoinfo.setElevationGain(woInfoBean.getElevationGain());
+            tWoinfo.setStartTime(woInfoBean.getStartTime());
+            tWoinfo.setCredits(woInfoBean.getCredits());
+            tWoinfo.setIsSegment(woInfoBean.getIsSegment());
+            tWoinfo.setIsLike(woInfoBean.getIsLike());
+            tWoinfo.setDistance(woInfoBean.getDistance());
+            tWoinfo.setCalories(woInfoBean.getCalories());
+            tWoinfo.setLocSource(woInfoBean.getLocSource());
+            tWoinfo.setMapHidden(woInfoBean.getMapHidden());
+            tWoinfo.setEndTime(woInfoBean.getEndTime());
+            tWoinfo.setAvgSpeed(woInfoBean.getAvgSpeed());
+            ls.add(tWoinfo);
+        }
+        woinfoService.inserts(ls);
+    }
 
     public void spiderTop() {
         for (int i = 1; i <= 414; i++) {

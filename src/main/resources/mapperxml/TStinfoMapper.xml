@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huifer.jenkinsspringboot.mapper.TStinfoMapper">
+  <resultMap id="BaseResultMap" type="com.huifer.jenkinsspringboot.entity.xz.TStinfo">
+    <!--@mbg.generated-->
+    <id column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="sum_duration" jdbcType="DECIMAL" property="sumDuration" />
+    <result column="sum_distance" jdbcType="DECIMAL" property="sumDistance" />
+    <result column="sum_elevation_gain" jdbcType="DECIMAL" property="sumElevationGain" />
+    <result column="count_distance" jdbcType="DECIMAL" property="countDistance" />
+    <result column="sum_credits" jdbcType="DECIMAL" property="sumCredits" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="month" jdbcType="INTEGER" property="month" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    fid, sum_duration, sum_distance, sum_elevation_gain, count_distance, sum_credits, 
+    user_id, `year`, `month`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_stinfo
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_stinfo
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="fid" keyProperty="fid" parameterType="com.huifer.jenkinsspringboot.entity.xz.TStinfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_stinfo (sum_duration, sum_distance, sum_elevation_gain, 
+      count_distance, sum_credits, user_id, 
+      `year`, `month`)
+    values (#{sumDuration,jdbcType=DECIMAL}, #{sumDistance,jdbcType=DECIMAL}, #{sumElevationGain,jdbcType=DECIMAL}, 
+      #{countDistance,jdbcType=DECIMAL}, #{sumCredits,jdbcType=DECIMAL}, #{userId,jdbcType=INTEGER}, 
+      #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="fid" keyProperty="fid" parameterType="com.huifer.jenkinsspringboot.entity.xz.TStinfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_stinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sumDuration != null">
+        sum_duration,
+      </if>
+      <if test="sumDistance != null">
+        sum_distance,
+      </if>
+      <if test="sumElevationGain != null">
+        sum_elevation_gain,
+      </if>
+      <if test="countDistance != null">
+        count_distance,
+      </if>
+      <if test="sumCredits != null">
+        sum_credits,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="year != null">
+        `year`,
+      </if>
+      <if test="month != null">
+        `month`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sumDuration != null">
+        #{sumDuration,jdbcType=DECIMAL},
+      </if>
+      <if test="sumDistance != null">
+        #{sumDistance,jdbcType=DECIMAL},
+      </if>
+      <if test="sumElevationGain != null">
+        #{sumElevationGain,jdbcType=DECIMAL},
+      </if>
+      <if test="countDistance != null">
+        #{countDistance,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCredits != null">
+        #{sumCredits,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huifer.jenkinsspringboot.entity.xz.TStinfo">
+    <!--@mbg.generated-->
+    update t_stinfo
+    <set>
+      <if test="sumDuration != null">
+        sum_duration = #{sumDuration,jdbcType=DECIMAL},
+      </if>
+      <if test="sumDistance != null">
+        sum_distance = #{sumDistance,jdbcType=DECIMAL},
+      </if>
+      <if test="sumElevationGain != null">
+        sum_elevation_gain = #{sumElevationGain,jdbcType=DECIMAL},
+      </if>
+      <if test="countDistance != null">
+        count_distance = #{countDistance,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCredits != null">
+        sum_credits = #{sumCredits,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        `year` = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        `month` = #{month,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huifer.jenkinsspringboot.entity.xz.TStinfo">
+    <!--@mbg.generated-->
+    update t_stinfo
+    set sum_duration = #{sumDuration,jdbcType=DECIMAL},
+      sum_distance = #{sumDistance,jdbcType=DECIMAL},
+      sum_elevation_gain = #{sumElevationGain,jdbcType=DECIMAL},
+      count_distance = #{countDistance,jdbcType=DECIMAL},
+      sum_credits = #{sumCredits,jdbcType=DECIMAL},
+      user_id = #{userId,jdbcType=INTEGER},
+      `year` = #{year,jdbcType=INTEGER},
+      `month` = #{month,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

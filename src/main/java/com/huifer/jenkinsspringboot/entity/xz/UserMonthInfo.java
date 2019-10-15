@@ -12,7 +12,7 @@ import java.util.List;
  */
 @NoArgsConstructor
 @Data
-public class UserInfo {
+public class UserMonthInfo {
 
 
     /**
@@ -22,7 +22,7 @@ public class UserInfo {
      */
 
     private String action;
-    private Integer res;
+    private BigDecimal res;
     private DataBean data;
 
     @NoArgsConstructor
@@ -94,26 +94,26 @@ public class UserInfo {
             private BigDecimal sport;
             private BigDecimal id;
             private Date uploadTime;
-            private BigDecimal userId;
+            private Integer userId;
             private String uuid;
             private String title;
-            private Integer cadenceSource;
-            private Integer isValid;
-            private Integer commentCount;
-            private Integer elevationLoss;
+            private BigDecimal cadenceSource;
+            private BigDecimal isValid;
+            private BigDecimal commentCount;
+            private BigDecimal elevationLoss;
             private Boolean hidden;
             private String desc;
             private String threedWorkout;
-            private Integer mapId;
-            private Integer elevationGain;
+            private BigDecimal mapId;
+            private BigDecimal elevationGain;
             private Long startTime;
-            private Integer credits;
-            private Integer isSegment;
-            private Integer isLike;
-            private Integer distance;
-            private Integer calories;
-            private Integer locSource;
-            private Integer mapHidden;
+            private BigDecimal credits;
+            private BigDecimal isSegment;
+            private BigDecimal isLike;
+            private BigDecimal distance;
+            private BigDecimal calories;
+            private BigDecimal locSource;
+            private BigDecimal mapHidden;
             private Long endTime;
             private BigDecimal avgSpeed;
         }
