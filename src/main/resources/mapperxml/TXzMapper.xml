@@ -108,7 +108,6 @@
   </update>
   <select id="findAll" resultMap="BaseResultMap">
     select
-    name,
     distinct(url)
     from t_xz
 <!--    where id <![CDATA[ <= ]]> 100-->

@@ -12,6 +12,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -236,6 +237,9 @@ public class XzSpider {
         }
     }
 
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
     /**
      * 根据城市id 抓取排行榜数据
      *
@@ -265,17 +269,9 @@ public class XzSpider {
                 userPro.setName(name);
                 userPro.setUrl(userUrl);
                 userPro.setPage(i);
-                try {
 
-                    TXz byNameAndUrl = xzService.findByNameAndUrl(name, userUrl);
-
-
-                    if (byNameAndUrl == null) {
-                        userPros.add(userPro);
-                    }
-                } catch (Exception e1) {
-                    log.info("异常用户名={},url={}", name, userUrl);
-                }
+//                stringRedisTemplate.opsForList().leftPush("user:info", JSONObject.toJSONString(userPro));
+                userPros.add(userPro);
             }
             xzService.inserts(userPros);
             userPros.clear();
@@ -329,7 +325,7 @@ public class XzSpider {
         headers.add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
         headers.add("Cache-Control", "max-age=0");
         headers.add("Connection", "keep-alive");
-        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571101615,1571104827,1571122515,1571183765; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571183871");
+        headers.add("Cookie", "td_cookie=2522742900; td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571122515,1571183765,1571185968,1571189278; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571189278");
         headers.add("Host", "www.imxingzhe.com");
         headers.add("Upgrade-Insecure-Requests", "1");
         headers.add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36");

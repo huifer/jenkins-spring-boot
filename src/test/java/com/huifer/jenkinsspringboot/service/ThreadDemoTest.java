@@ -11,8 +11,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ThreadDemoTest {
     @Autowired
     ThreadDemo threadDemo;
+
+    /**
+     * 路线
+     *
+     * @throws Exception
+     */
     @Test
-    public void f() throws Exception{
+    public void userPro() throws Exception {
+        threadDemo.runUid();
+    }
+
+    /**
+     * 用户
+     *
+     * @throws Exception
+     */
+    @Test
+    public void user() throws Exception{
         threadDemo.run();
     }
 }

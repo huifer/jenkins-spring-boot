@@ -67,12 +67,8 @@ spring:
   redis:
     database: 0
     host: localhost
-    port: 6380
-    sentinel:
-      master: mymaster
-      nodes: localhost:26380,localhost:26381,localhost:26382
-    timeout: 60000
-    password: master
+    port: 6379
+
 
 
 mybatis:
