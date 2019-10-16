@@ -274,7 +274,7 @@ public class XzSpider {
                         userPros.add(userPro);
                     }
                 } catch (Exception e1) {
-                    log.error("异常用户名={},url={}", name, userUrl);
+                    log.info("异常用户名={},url={}", name, userUrl);
                 }
             }
             xzService.inserts(userPros);
