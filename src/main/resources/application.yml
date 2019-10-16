@@ -2,6 +2,7 @@ server:
   port: 9999
 
 
+
 # wakatime 配置
 wakatime:
   # 基础url
@@ -63,6 +64,16 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
         show_sql: true
+  redis:
+    database: 0
+    host: localhost
+    port: 6380
+    sentinel:
+      master: mymaster
+      nodes: localhost:26380,localhost:26381,localhost:26382
+    timeout: 60000
+    password: master
+
 
 mybatis:
   mapper-locations: classpath:mapperxml/*Mapper.xml
