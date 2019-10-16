@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @TableName("t_xz")
-public class TXz  implements Serializable{
+public class TXz  implements Serializable {
     @TableId(value = "id",type = IdType.INPUT)
     private Integer id;
 

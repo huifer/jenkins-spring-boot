@@ -3,6 +3,8 @@ package com.huifer.jenkinsspringboot.entity.xz;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @Date: 2019-10-15
  */
