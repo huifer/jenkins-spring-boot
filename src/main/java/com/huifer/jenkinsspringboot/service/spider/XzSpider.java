@@ -265,10 +265,16 @@ public class XzSpider {
                 userPro.setName(name);
                 userPro.setUrl(userUrl);
                 userPro.setPage(i);
+                try {
 
-                TXz byNameAndUrl = xzService.findByNameAndUrl(name, url);
-                if (byNameAndUrl == null) {
-                    userPros.add(userPro);
+                    TXz byNameAndUrl = xzService.findByNameAndUrl(name, userUrl);
+
+
+                    if (byNameAndUrl == null) {
+                        userPros.add(userPro);
+                    }
+                } catch (Exception e1) {
+                    log.error("异常用户名={},url={}", name, userUrl);
                 }
             }
             xzService.inserts(userPros);
@@ -321,8 +327,6 @@ public class XzSpider {
         HttpHeaders headers = new HttpHeaders();
 
         headers.add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
-        headers.add("Accept-Encoding", "gzip, deflate");
-        headers.add("Accept-Language", "zh-CN,zh;q=0.9");
         headers.add("Cache-Control", "max-age=0");
         headers.add("Connection", "keep-alive");
         headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571101615,1571104827,1571122515,1571183765; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571183871");

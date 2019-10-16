@@ -13,6 +13,6 @@ public class ThreadDemoTest {
     ThreadDemo threadDemo;
     @Test
     public void f() throws Exception{
-        threadDemo.runUid();
+        threadDemo.run();
     }
 }

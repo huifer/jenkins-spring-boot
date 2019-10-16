@@ -108,7 +108,8 @@
   </update>
   <select id="findAll" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>
+    name,
+    distinct(url)
     from t_xz
 <!--    where id <![CDATA[ <= ]]> 100-->
 
