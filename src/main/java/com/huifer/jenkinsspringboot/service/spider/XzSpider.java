@@ -84,12 +84,10 @@ public class XzSpider {
     }
 
     private Integer url2userId(String url) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571099537,1571101155,1571101615,1571104827; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571105168");
         ResponseEntity<String> exchange = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
-                new HttpEntity<String>(headers),
+                new HttpEntity<String>(headers()),
 
                 String.class
         );
@@ -109,23 +107,11 @@ public class XzSpider {
      * @throws Exception
      */
     public void line() throws Exception {
-        String Cookie = "td_cookie=2441531771; td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1570757134,1571020126,1571020162; rd=X4DR; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571029514";
         String url = "http://www.imxingzhe.com/xing/72076175/gpx/";
-        HttpHeaders headers = new HttpHeaders();
-
-        headers.add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
-        headers.add("Accept-Encoding", "gzip, deflate");
-        headers.add("Accept-Language", "zh-CN,zh;q=0.9");
-        headers.add("Cache-Control", "max-age=0");
-        headers.add("Connection", "keep-alive");
-        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571099537,1571101155,1571101615,1571104827; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571105168");
-        headers.add("Host", "www.imxingzhe.com");
-        headers.add("Upgrade-Insecure-Requests", "1");
-        headers.add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36");
         ResponseEntity<String> exchange = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
-                new HttpEntity<String>(headers),
+                new HttpEntity<String>(headers()),
                 String.class
         );
         String body = exchange.getBody();
@@ -156,12 +142,10 @@ public class XzSpider {
     private void getUserMonth(int userId, int year, int month) {
         log.info("开始获取用户年月数据,user_id={},year={},month={}", userId, year, month);
         String url = "http://www.imxingzhe.com/api/v4/user_month_info?user_id=%d&year=%d&month=%d";
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571099537,1571101155,1571101615,1571104827; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571105168");
         ResponseEntity<String> exchange = restTemplate.exchange(
                 String.format(url, userId, year, month),
                 HttpMethod.GET,
-                new HttpEntity<String>(headers),
+                new HttpEntity<String>(headers()),
 
                 String.class
         );
@@ -281,9 +265,11 @@ public class XzSpider {
                 userPro.setName(name);
                 userPro.setUrl(userUrl);
                 userPro.setPage(i);
-                userPros.add(userPro);
 
-
+                TXz byNameAndUrl = xzService.findByNameAndUrl(name, url);
+                if (byNameAndUrl == null) {
+                    userPros.add(userPro);
+                }
             }
             xzService.inserts(userPros);
             userPros.clear();
@@ -315,14 +301,12 @@ public class XzSpider {
         }
 
         public GetTotal invoke() {
-            HttpHeaders headers = new HttpHeaders();
 
-            headers.add("Cookie", "sessionid=dpy9lnbrefdkfw21rjs7vzux87yrbsmk; csrftoken=1EWwgwGQG6GwpkU8QsbZh0m2E2v7PAE6; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571048548,1571056998,1571138433,1571146309; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571146309");
             ResponseEntity<String> exchange = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
 //                    HttpEntity.EMPTY,
-                    new HttpEntity<String>(headers),
+                    new HttpEntity<String>(headers()),
                     String.class
             );
             body = exchange.getBody();
@@ -331,5 +315,20 @@ public class XzSpider {
             total = regex(regex1, "\\d+");
             return this;
         }
+    }
+
+    private HttpHeaders headers() {
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
+        headers.add("Accept-Encoding", "gzip, deflate");
+        headers.add("Accept-Language", "zh-CN,zh;q=0.9");
+        headers.add("Cache-Control", "max-age=0");
+        headers.add("Connection", "keep-alive");
+        headers.add("Cookie", "td_cookie=2441244528; csrftoken=nQKAt5cwYT9dsIjBteRKSaNLQZnZynZ3; sessionid=5lx3yvdfwsacv0eaif7rfy6wrvy1x62h; Hm_lvt_7b262f3838ed313bc65b9ec6316c79c4=1571101615,1571104827,1571122515,1571183765; Hm_lpvt_7b262f3838ed313bc65b9ec6316c79c4=1571183871");
+        headers.add("Host", "www.imxingzhe.com");
+        headers.add("Upgrade-Insecure-Requests", "1");
+        headers.add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36");
+        return headers;
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  */
 @NoArgsConstructor
 @Data
-public class UserMonthInfo {
+public class UserMonthInfo implements Serializable {
 
 
     /**

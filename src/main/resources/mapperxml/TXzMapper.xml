@@ -116,4 +116,9 @@
   <select id="findCityId" resultType="java.lang.Integer">
     SELECT DISTINCT(city_id) FROM `t_xz`
   </select>
+  <select id="findByNameAndUrl" resultType="Txz">
+    select
+    <include refid="Base_Column_List"/>
+    from t_xz where name=#{name} and url=#{url}
+  </select>
 </mapper>

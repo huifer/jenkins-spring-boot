@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
 @TableName("t_stinfo")
-public class TStinfo {
+public class TStinfo implements Serializable {
     @TableId(value = "fid", type = IdType.INPUT)
     private Integer fid;
 

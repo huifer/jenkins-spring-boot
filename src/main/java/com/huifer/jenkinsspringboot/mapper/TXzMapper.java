@@ -26,4 +26,6 @@ public interface TXzMapper extends BaseMapper<TXz> {
     List<TXz> findAll();
 
     List<Integer> findCityId();
+
+    TXz findByNameAndUrl(@Param("name") String name, @Param("url") String url);
 }

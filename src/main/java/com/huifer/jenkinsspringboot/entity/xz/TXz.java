@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @TableName("t_xz")
-public class TXz {
+public class TXz  implements Serializable{
     @TableId(value = "id",type = IdType.INPUT)
     private Integer id;
 

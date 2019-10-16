@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class UserPro {
+public class UserPro implements Serializable {
     private String name;
     private String url;
     private Integer cityId;
